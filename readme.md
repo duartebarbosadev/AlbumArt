@@ -1,0 +1,3 @@
+Todo:
+
+- Proguard/Shrink stuff

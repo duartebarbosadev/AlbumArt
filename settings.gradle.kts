@@ -24,4 +24,11 @@ dependencyResolutionManagement {
 
 rootProject.name = "AlbumArt"
 include(":app")
- 
+
+include(":core:network")
+
+include(":feature:albumcover:impl")
+include(":feature:albumcover:api")
+
+include(":feature:albumdetails:api")
+include(":feature:albumdetails:impl")
