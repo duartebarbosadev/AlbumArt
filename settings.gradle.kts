@@ -28,8 +28,8 @@ include(":app")
 
 include(":core:network")
 
-include(":feature:albumcover:impl")
-include(":feature:albumcover:api")
+include(":feature:albumlist:impl")
+include(":feature:albumlist:api")
 
 include(":feature:albumdetails:api")
 include(":feature:albumdetails:impl")

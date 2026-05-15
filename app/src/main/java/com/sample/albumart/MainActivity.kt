@@ -10,8 +10,8 @@ import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
 import com.sample.albumart.ui.theme.AlbumArtTheme
-import com.sample.feature.albumcover.api.navigation.AlbumCoverNavKey
-import com.sample.feature.albumcover.impl.navigation.albumCoverEntry
+import com.sample.feature.albumlist.api.navigation.AlbumListNavKey
+import com.sample.feature.albumlist.impl.navigation.albumlistEntry
 import com.sample.feature.albumdetails.impl.navigation.albumDetailsEntry
 
 class MainActivity : ComponentActivity() {
@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             AlbumArtTheme {
 
-                val backStack = remember { mutableStateListOf<NavKey>(AlbumCoverNavKey) }
+                val backStack = remember { mutableStateListOf<NavKey>(AlbumListNavKey) }
 
                 NavDisplay(
                     backStack = backStack,
@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
                         }
                     },
                     entryProvider = entryProvider {
-                        albumCoverEntry(backStack)
+                        albumlistEntry(backStack)
                         albumDetailsEntry()
                     }
                 )

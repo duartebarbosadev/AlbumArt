@@ -1,0 +1,18 @@
+package com.sample.feature.albumlist.impl.navigation
+
+import androidx.compose.runtime.snapshots.SnapshotStateList
+import androidx.navigation3.runtime.EntryProviderScope
+import androidx.navigation3.runtime.NavKey
+import com.sample.feature.albumlist.api.navigation.AlbumListNavKey
+import com.sample.feature.albumlist.impl.AlbumListScreen
+import com.sample.feature.albumdetails.api.navigation.AlbumDetailsNavKey
+
+fun EntryProviderScope<NavKey>.albumlistEntry(backStack : SnapshotStateList<NavKey>) {
+    entry<AlbumListNavKey> {
+        AlbumListScreen(
+            onAlbumClick = { albumId ->
+                backStack.add(AlbumDetailsNavKey(albumId))
+            }
+        )
+    }
+}

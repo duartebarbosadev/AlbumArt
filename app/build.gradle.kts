@@ -50,8 +50,8 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.navigation3.ui)
 
-    implementation(projects.feature.albumcover.impl)
-    implementation(projects.feature.albumcover.api)
+    implementation(projects.feature.albumlist.impl)
+    implementation(projects.feature.albumlist.api)
 
     implementation(projects.feature.albumdetails.impl)
     implementation(projects.feature.albumdetails.api)
