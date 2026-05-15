@@ -7,7 +7,7 @@ import com.sample.feature.albumlist.api.navigation.AlbumListNavKey
 import com.sample.feature.albumlist.impl.AlbumListScreen
 import com.sample.feature.albumdetails.api.navigation.AlbumDetailsNavKey
 
-fun EntryProviderScope<NavKey>.albumlistEntry(backStack : SnapshotStateList<NavKey>) {
+fun EntryProviderScope<NavKey>.albumListEntry(backStack : SnapshotStateList<NavKey>) {
     entry<AlbumListNavKey> {
         AlbumListScreen(
             onAlbumClick = { albumId ->

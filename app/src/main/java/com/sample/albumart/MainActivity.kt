@@ -11,7 +11,7 @@ import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
 import com.sample.albumart.ui.theme.AlbumArtTheme
 import com.sample.feature.albumlist.api.navigation.AlbumListNavKey
-import com.sample.feature.albumlist.impl.navigation.albumlistEntry
+import com.sample.feature.albumlist.impl.navigation.albumListEntry
 import com.sample.feature.albumdetails.impl.navigation.albumDetailsEntry
 
 class MainActivity : ComponentActivity() {
@@ -34,7 +34,7 @@ class MainActivity : ComponentActivity() {
                         }
                     },
                     entryProvider = entryProvider {
-                        albumlistEntry(backStack)
+                        albumListEntry(backStack)
                         albumDetailsEntry()
                     }
                 )
