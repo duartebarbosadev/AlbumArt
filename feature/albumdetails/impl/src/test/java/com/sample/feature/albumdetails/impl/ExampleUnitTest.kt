@@ -1,4 +1,4 @@
-package com.sample.feature.albumcover.impl
+package com.sample.feature.albumdetails.impl
 
 import org.junit.Test
 

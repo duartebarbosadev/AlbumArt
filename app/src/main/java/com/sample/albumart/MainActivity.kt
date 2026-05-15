@@ -4,44 +4,41 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
+import androidx.navigation3.runtime.NavKey
+import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.ui.NavDisplay
 import com.sample.albumart.ui.theme.AlbumArtTheme
+import com.sample.feature.albumcover.api.navigation.AlbumCoverNavKey
+import com.sample.feature.albumcover.impl.navigation.albumCoverEntry
+import com.sample.feature.albumdetails.impl.navigation.albumDetailsEntry
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // TODO Splashscreen use it to wait for album cover loading
+
         enableEdgeToEdge()
         setContent {
             AlbumArtTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+
+                val backStack = remember { mutableStateListOf<NavKey>(AlbumCoverNavKey) }
+
+                NavDisplay(
+                    backStack = backStack,
+                    onBack = {
+                        if (backStack.isNotEmpty()) {
+                            backStack.removeLastOrNull()
+                        }
+                    },
+                    entryProvider = entryProvider {
+                        albumCoverEntry(backStack)
+                        albumDetailsEntry()
+                    }
+                )
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    AlbumArtTheme {
-        Greeting("Android")
     }
 }

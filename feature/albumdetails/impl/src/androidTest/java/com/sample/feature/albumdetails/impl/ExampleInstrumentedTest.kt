@@ -1,4 +1,4 @@
-package com.sample.feature.albumcover.impl
+package com.sample.feature.albumdetails.impl
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
