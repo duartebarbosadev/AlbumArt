@@ -13,7 +13,9 @@ import com.sample.albumart.ui.theme.AlbumArtTheme
 import com.sample.feature.albumlist.api.navigation.AlbumListNavKey
 import com.sample.feature.albumlist.impl.navigation.albumListEntry
 import com.sample.feature.albumdetails.impl.navigation.albumDetailsEntry
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

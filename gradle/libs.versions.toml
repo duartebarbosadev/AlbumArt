@@ -9,12 +9,12 @@ activityCompose = "1.13.0"
 kotlin = "2.3.21"
 composeBom = "2026.05.00"
 appcompat = "1.7.1"
-material = "1.14.0"
 jetbrainsKotlinJvm = "2.3.21"
 navigation3Core = "1.1.1"
-foundationLayout = "1.11.1"
-androidxComposeMaterial3Adaptive = "1.2.0"
-androidxComposeMaterial3AdaptiveNavigation3 = "1.3.0-beta01"
+
+hilt = "2.59.2"
+androidxHiltNavigationCompose = "1.3.0"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -33,6 +33,10 @@ androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-te
 androidx-compose-material3 = { module = "androidx.compose.material3:material3" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
+androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "androidxHiltNavigationCompose" }
+
 
 androidx-navigation3-runtime = { group = "androidx.navigation3", name = "navigation3-runtime", version.ref = "navigation3Core" }
 androidx-navigation3-ui = { module = "androidx.navigation3:navigation3-ui", version.ref = "navigation3Core" }
@@ -44,4 +48,5 @@ kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "ko
 android-library = { id = "com.android.library", version.ref = "agp" }
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 
-
+ksp = { id = "com.google.devtools.ksp", version = "2.3.6" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
