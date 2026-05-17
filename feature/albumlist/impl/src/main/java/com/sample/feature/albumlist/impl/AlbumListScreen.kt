@@ -89,6 +89,10 @@ fun AlbumItem(
             )
 
             Text(text = album.title?: "Unknown Album")
+            // If album title doesn't contain the artist name, show the artist name as well
+            if (album.title?.contains(album.artist ?: "") == false) {
+                Text(text = album.artist?: "Unknown Artist")
+            }
         }
     }
 }
