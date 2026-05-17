@@ -17,6 +17,7 @@ fun EntryProviderScope<NavKey>.albumDetailsEntry() {
     entry<AlbumDetailsNavKey> { key ->
 
         val viewModel: AlbumDetailsViewModel = hiltViewModel(
+            key = key.albumId,
             creationCallback = { factory: AlbumDetailsViewModel.Factory ->
                 factory.create(key.albumId)
             }
