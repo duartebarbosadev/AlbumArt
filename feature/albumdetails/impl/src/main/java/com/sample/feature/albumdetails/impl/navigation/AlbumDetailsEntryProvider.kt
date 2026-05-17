@@ -11,6 +11,8 @@ fun EntryProviderScope<NavKey>.albumDetailsEntry() {
 
     // Is ID the best param? because we don't do any subsequent queries, so maybe we can just pass the whole details object?
     entry<AlbumDetailsNavKey> { key ->
-        AlbumDetailsScreen(key.id)
+        AlbumDetailsScreen(key.album, onBackClick = {
+
+        })
     }
 }

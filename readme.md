@@ -7,3 +7,4 @@ Todo:
 
 - add spotless lint
 - Test without internet, foldable device etc
+- Animation expand on click and retract to the same album position on close
