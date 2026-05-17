@@ -1,4 +1,4 @@
-package com.sample.core.network
+package com.sample.core.network.di
 
 import dagger.Module
 import dagger.Provides
@@ -9,8 +9,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class NetworkModule {
-
+internal object NetworkModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient =

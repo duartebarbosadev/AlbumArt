@@ -6,3 +6,4 @@ Todo:
 - check unused libs
 
 - add spotless lint
+- Test without internet, foldable device etc
