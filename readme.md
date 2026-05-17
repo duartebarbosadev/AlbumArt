@@ -11,3 +11,4 @@ Todo:
 - Check all code comments
 - General code documentation
 - OkHttpInterceptor for logging and debugging
+- App Art

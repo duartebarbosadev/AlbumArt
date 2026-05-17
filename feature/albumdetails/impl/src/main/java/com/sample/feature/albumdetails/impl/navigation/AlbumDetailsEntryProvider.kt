@@ -10,8 +10,6 @@ import com.sample.feature.albumdetails.api.navigation.AlbumDetailsNavKey
 import com.sample.feature.albumdetails.impl.AlbumDetailsScreen
 import com.sample.feature.albumdetails.impl.AlbumDetailsViewModel
 
-
-
 fun EntryProviderScope<NavKey>.albumDetailsEntry() {
 
     entry<AlbumDetailsNavKey> { key ->

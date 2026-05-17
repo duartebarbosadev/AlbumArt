@@ -2,9 +2,9 @@ package com.sample.feature.albumlist.impl
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.Card
@@ -13,8 +13,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import coil.compose.AsyncImage
 import com.sample.core.data.model.Album
 import com.sample.core.ui.DevicePreviews
 
@@ -50,9 +52,8 @@ private fun AlbumList(
 ) {
     LazyVerticalGrid(
         columns = GridCells.Adaptive(minSize = 128.dp),
-        contentPadding = PaddingValues(16.dp),
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
+        horizontalArrangement = Arrangement.spacedBy(6.dp),
+        verticalArrangement = Arrangement.spacedBy(6.dp),
     ) {
         items(albums.size) { index ->
             val album = albums[index]
@@ -75,9 +76,18 @@ fun AlbumItem(
         modifier = Modifier
             .fillMaxWidth()
     ) {
-        Box(
-            modifier = Modifier.padding(16.dp)
+        Column(
         ) {
+
+            AsyncImage(
+                model = album.largeImageURL ?: album.imageURL,
+                contentDescription = album.name ?: album.title ?: "Album cover",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(1f),
+                contentScale = ContentScale.Crop,
+            )
+
             Text(text = album.title?: "Unknown Album")
         }
     }
