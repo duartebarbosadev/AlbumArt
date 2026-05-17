@@ -30,7 +30,8 @@ dependencies {
 
     implementation(projects.core.ui)
     implementation(projects.core.data)
-    
+    implementation(projects.feature.albumdetails.api)
+
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.navigation3.runtime)
@@ -44,7 +45,10 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
     ksp(libs.hilt.compiler)
 
-    implementation(projects.feature.albumdetails.api)
+
+    implementation(libs.coil.kt)
+    implementation(libs.coil.kt.compose)
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)

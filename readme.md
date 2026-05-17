@@ -10,3 +10,4 @@ Todo:
 - Animation expand on click and retract to the same album position on close
 - Check all code comments
 - General code documentation
+- OkHttpInterceptor for logging and debugging
