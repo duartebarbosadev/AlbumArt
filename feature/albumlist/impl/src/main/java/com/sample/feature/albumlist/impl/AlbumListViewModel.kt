@@ -15,8 +15,8 @@ class AlbumListViewModel @Inject constructor(
     private val repository: AlbumsRepository
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow<AlbumUiState>(AlbumUiState.Loading)
-    val uiState: StateFlow<AlbumUiState> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow<AlbumListUiState>(AlbumListUiState.Loading)
+    val uiState: StateFlow<AlbumListUiState> = _uiState.asStateFlow()
 
     init {
         loadAlbums()
@@ -28,9 +28,9 @@ class AlbumListViewModel @Inject constructor(
             runCatching {
                 repository.getAlbums()
             }.onSuccess {  albums ->
-                _uiState.value = AlbumUiState.Success(albums)
+                _uiState.value = AlbumListUiState.Success(albums)
             }.onFailure { error ->
-                _uiState.value = AlbumUiState.Error(error.message ?: "Failed to load albums")
+                _uiState.value = AlbumListUiState.Error(error.message ?: "Failed to load albums")
             }
         }
     }

@@ -1,18 +1,29 @@
 package com.sample.feature.albumdetails.impl.navigation
 
 
+
+
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.NavKey
 import com.sample.feature.albumdetails.api.navigation.AlbumDetailsNavKey
 import com.sample.feature.albumdetails.impl.AlbumDetailsScreen
+import com.sample.feature.albumdetails.impl.AlbumDetailsViewModel
+
 
 
 fun EntryProviderScope<NavKey>.albumDetailsEntry() {
 
-    // Is ID the best param? because we don't do any subsequent queries, so maybe we can just pass the whole details object?
     entry<AlbumDetailsNavKey> { key ->
-        AlbumDetailsScreen(key.album, onBackClick = {
 
-        })
+        val viewModel: AlbumDetailsViewModel = hiltViewModel(
+            creationCallback = { factory: AlbumDetailsViewModel.Factory ->
+                factory.create(key.albumId)
+            }
+        )
+
+        AlbumDetailsScreen(
+            viewModel = viewModel,
+        )
     }
 }

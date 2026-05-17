@@ -2,6 +2,7 @@ package com.sample.feature.albumdetails.impl
 
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -19,26 +20,56 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.sample.core.data.model.Album
 import com.sample.core.ui.DevicePreviews
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AlbumDetailsScreen(
-    album: Album,
-    onBackClick: () -> Unit,
+    viewModel: AlbumDetailsViewModel = hiltViewModel(),
 ) {
+
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+
+    when (val uiState = uiState) {
+        is AlbumDetailsUiState.Loading -> {
+            Box(modifier = Modifier) {
+                Text("Loading...")
+            }
+        }
+
+        is AlbumDetailsUiState.Success -> {
+            AlbumDetail(
+                album = uiState.album
+            )
+        }
+
+        is AlbumDetailsUiState.Error -> {
+            Box(modifier = Modifier) {
+                Text("Error: ${uiState.message}")
+            }
+        }
+    }
+
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AlbumDetail(album: Album) {
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
                     Text("Album Details")
                 },
-           )
+            )
         }
     ) { innerPadding ->
         AlbumDetailContent(
@@ -155,7 +186,7 @@ private fun AlbumDetailRow(
 @DevicePreviews
 @Composable
 fun AlbumDetailsScreenPreview() {
-    AlbumDetailsScreen(
+    AlbumDetail(
         album = Album(
             id = "1440925843",
             title = "Enema of the State - blink-182",
@@ -172,6 +203,5 @@ fun AlbumDetailsScreenPreview() {
             category = "Alternative",
             albumUrl = null,
         ),
-        onBackClick = {}
     )
 }

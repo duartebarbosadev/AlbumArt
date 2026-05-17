@@ -20,25 +20,25 @@ import com.sample.core.ui.DevicePreviews
 
 @Composable
 fun AlbumListScreen(
-    onAlbumClick : (album: Album) -> Unit,
+    onAlbumClick : (albumId: String) -> Unit,
     viewModel: AlbumListViewModel = hiltViewModel()
 ) {
 
     val albumDataState by viewModel.uiState.collectAsState()
 
-    when (albumDataState) {
-        is AlbumUiState.Loading -> {
+    when (val albumDataState = albumDataState) {
+        is AlbumListUiState.Loading -> {
             Box(modifier = Modifier) {
                 Text("Loading...")
             }
         }
-        is AlbumUiState.Error -> {
+        is AlbumListUiState.Error -> {
             Box(modifier = Modifier) {
-                Text("Error: ${(albumDataState as AlbumUiState.Error).message}")
+                Text("Error: ${albumDataState.message}")
             }
         }
-        is AlbumUiState.Success -> {
-            AlbumList(albums = (albumDataState as AlbumUiState.Success).albums, onAlbumClick)
+        is AlbumListUiState.Success -> {
+            AlbumList(albums = albumDataState.albums, onAlbumClick)
         }
     }
 }
@@ -46,7 +46,7 @@ fun AlbumListScreen(
 @Composable
 private fun AlbumList(
     albums: List<Album>,
-    onAlbumClick: (Album) -> Unit
+    onAlbumClick: (String) -> Unit
 ) {
     LazyVerticalGrid(
         columns = GridCells.Adaptive(minSize = 128.dp),
@@ -58,7 +58,7 @@ private fun AlbumList(
             val album = albums[index]
             AlbumItem(
                 album = album,
-                onClick = { onAlbumClick(album) }
+                onClick = { onAlbumClick(album.id!!) }
             )
         }
     }
