@@ -1,12 +1,10 @@
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
-    namespace = "com.sample.network"
+    namespace = "com.sample.core.data"
     compileSdk {
         version = release(36) {
             minorApiLevel = 1
@@ -27,11 +25,16 @@ android {
 }
 
 dependencies {
-    implementation(libs.okhttp)
-    implementation(libs.kotlinx.serialization.json)
-
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.material)
     testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation(libs.androidx.junit)
 
-    implementation(libs.hilt.android)
+
+    implementation(libs.androidx.hilt.navigation.compose)
     ksp(libs.hilt.compiler)
+
+    implementation(projects.core.network)
 }

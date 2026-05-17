@@ -33,3 +33,5 @@ include(":feature:albumlist:api")
 
 include(":feature:albumdetails:api")
 include(":feature:albumdetails:impl")
+include(":core:data")
+include(":core:ui")
