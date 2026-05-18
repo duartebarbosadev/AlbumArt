@@ -18,13 +18,13 @@
     android:height="108dp"
     android:viewportWidth="512"
     android:viewportHeight="512">
-  <group android:scaleX="0.66"
-      android:scaleY="0.66"
-      android:translateX="87.04"
-      android:translateY="87.04">
-      <!-- Rule 2: Symbolism (The Record Spindle) -->
+  <group android:scaleX="0.67"
+      android:scaleY="0.67"
+      android:translateX="84.48"
+      android:translateY="84.48">
+      <!-- Monochrome version for themed icons. All elements should be one color (usually black) -->
       <path
-          android:fillColor="#F8FAFC"
+          android:fillColor="#FF000000"
           android:pathData="M 272,256 A 16,16 0 1,1 240,256 A 16,16 0 1,1 272,256" />
 
       <group
@@ -32,35 +32,29 @@
           android:pivotY="256"
           android:rotation="135">
 
-          <!-- Rule 5: Dynamic Energy (The Rising Chart) -->
-          <!-- Track 1: Lower Ranks -->
           <path
-              android:strokeColor="#4C1D95"
+              android:strokeColor="#FF000000"
               android:strokeWidth="32"
               android:strokeLineCap="round"
               android:trimPathEnd="0.1492"
               android:pathData="M 304,256 A 48,48 0 1,1 208,256 A 48,48 0 1,1 304,256" />
 
-          <!-- Track 2: Climbing the Chart -->
           <path
-              android:strokeColor="#7C3AED"
+              android:strokeColor="#FF000000"
               android:strokeWidth="32"
               android:strokeLineCap="round"
               android:trimPathEnd="0.3498"
               android:pathData="M 352,256 A 96,96 0 1,1 160,256 A 96,96 0 1,1 352,256" />
 
-          <!-- Track 3: Top 10 -->
           <path
-              android:strokeColor="#C026D3"
+              android:strokeColor="#FF000000"
               android:strokeWidth="32"
               android:strokeLineCap="round"
               android:trimPathEnd="0.6499"
               android:pathData="M 400,256 A 144,144 0 1,1 112,256 A 144,144 0 1,1 400,256" />
 
-          <!-- Rule 3 & 4: Purposeful Color & Distinctiveness -->
-          <!-- Track 4: The Number 1 Spot -->
           <path
-              android:strokeColor="#FF3366"
+              android:strokeColor="#FF000000"
               android:strokeWidth="32"
               android:strokeLineCap="round"
               android:trimPathEnd="0.8994"

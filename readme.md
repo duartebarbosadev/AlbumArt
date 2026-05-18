@@ -1,3 +1,7 @@
+# AlbumArt
+
+![Play Store Icon](app/src/main/ic_launcher-playstore.png)
+
 Todo:
 
 - Proguard/Shrink stuff

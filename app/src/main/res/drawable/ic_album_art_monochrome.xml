@@ -1,0 +1,45 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="512"
+    android:viewportHeight="512">
+    <!-- Monochrome version for themed icons. All elements should be one color (usually black) -->
+    <path
+        android:fillColor="#FF000000"
+        android:pathData="M 272,256 A 16,16 0 1,1 240,256 A 16,16 0 1,1 272,256" />
+
+    <group
+        android:pivotX="256"
+        android:pivotY="256"
+        android:rotation="135">
+
+        <path
+            android:strokeColor="#FF000000"
+            android:strokeWidth="32"
+            android:strokeLineCap="round"
+            android:trimPathEnd="0.1492"
+            android:pathData="M 304,256 A 48,48 0 1,1 208,256 A 48,48 0 1,1 304,256" />
+
+        <path
+            android:strokeColor="#FF000000"
+            android:strokeWidth="32"
+            android:strokeLineCap="round"
+            android:trimPathEnd="0.3498"
+            android:pathData="M 352,256 A 96,96 0 1,1 160,256 A 96,96 0 1,1 352,256" />
+
+        <path
+            android:strokeColor="#FF000000"
+            android:strokeWidth="32"
+            android:strokeLineCap="round"
+            android:trimPathEnd="0.6499"
+            android:pathData="M 400,256 A 144,144 0 1,1 112,256 A 144,144 0 1,1 400,256" />
+
+        <path
+            android:strokeColor="#FF000000"
+            android:strokeWidth="32"
+            android:strokeLineCap="round"
+            android:trimPathEnd="0.8994"
+            android:pathData="M 448,256 A 192,192 0 1,1 64,256 A 192,192 0 1,1 448,256" />
+
+    </group>
+</vector>
