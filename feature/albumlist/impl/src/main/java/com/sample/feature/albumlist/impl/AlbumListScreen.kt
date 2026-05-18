@@ -237,7 +237,7 @@ private fun LoadingState() {
     ) {
         CircularProgressIndicator()
         Text(
-            text = "Finding fresh album art...",
+            text = "Obtaining top 100 albums...",
             modifier = Modifier.padding(top = 16.dp),
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
