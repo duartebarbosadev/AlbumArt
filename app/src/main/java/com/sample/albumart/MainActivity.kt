@@ -12,9 +12,9 @@ import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
 import com.sample.albumart.ui.theme.AlbumArtTheme
+import com.sample.feature.albumdetails.impl.navigation.albumDetailsEntry
 import com.sample.feature.albumlist.api.navigation.AlbumListNavKey
 import com.sample.feature.albumlist.impl.navigation.albumListEntry
-import com.sample.feature.albumdetails.impl.navigation.albumDetailsEntry
 import dagger.hilt.android.AndroidEntryPoint
 
 @OptIn(ExperimentalSharedTransitionApi::class)
@@ -38,15 +38,16 @@ class MainActivity : ComponentActivity() {
                                 backStack.removeLastOrNull()
                             }
                         },
-                        entryProvider = entryProvider {
-                            albumListEntry(
-                                backStack = backStack,
-                                sharedTransitionScope = this@SharedTransitionLayout,
-                            )
-                            albumDetailsEntry(
-                                sharedTransitionScope = this@SharedTransitionLayout,
-                            )
-                        }
+                        entryProvider =
+                            entryProvider {
+                                albumListEntry(
+                                    backStack = backStack,
+                                    sharedTransitionScope = this@SharedTransitionLayout,
+                                )
+                                albumDetailsEntry(
+                                    sharedTransitionScope = this@SharedTransitionLayout,
+                                )
+                            },
                     )
                 }
             }

@@ -5,4 +5,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 // Is ID the best param? because we don't do any subsequent queries, so maybe we can just pass the whole details object?
-data class AlbumDetailsNavKey(val albumId: String): NavKey
+data class AlbumDetailsNavKey(
+    val albumId: String,
+) : NavKey

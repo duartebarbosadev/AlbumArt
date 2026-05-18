@@ -18,18 +18,28 @@ import javax.inject.Singleton
 internal object NetworkModule {
     @Provides
     @Singleton
-    fun provideOkHttpClient(@ApplicationContext context: Context): OkHttpClient = OkHttpClient.Builder().apply {
-        if (BuildConfig.DEBUG) {
-            val collector = ChuckerCollector(
-                context = context,
-                showNotification = true,
-                retentionPeriod = RetentionManager.Period.ONE_HOUR,
-            )
-            val chuckerInterceptor = ChuckerInterceptor.Builder(context).collector(collector)
-                .maxContentLength(250_000L).alwaysReadResponseBody(true).createShortcut(true)
-                .build()
-            addInterceptor(chuckerInterceptor)
-        }
-    }.build()
-
+    fun provideOkHttpClient(
+        @ApplicationContext context: Context,
+    ): OkHttpClient =
+        OkHttpClient
+            .Builder()
+            .apply {
+                if (BuildConfig.DEBUG) {
+                    val collector =
+                        ChuckerCollector(
+                            context = context,
+                            showNotification = true,
+                            retentionPeriod = RetentionManager.Period.ONE_HOUR,
+                        )
+                    val chuckerInterceptor =
+                        ChuckerInterceptor
+                            .Builder(context)
+                            .collector(collector)
+                            .maxContentLength(250_000L)
+                            .alwaysReadResponseBody(true)
+                            .createShortcut(true)
+                            .build()
+                    addInterceptor(chuckerInterceptor)
+                }
+            }.build()
 }
