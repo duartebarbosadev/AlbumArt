@@ -30,7 +30,11 @@ class AlbumListViewModel
                 }.onSuccess { albums ->
                     _uiState.value = AlbumListUiState.Success(albums)
                 }.onFailure { error ->
-                    _uiState.value = AlbumListUiState.Error(error.message ?: "Failed to load albums")
+                    _uiState.value =
+                        AlbumListUiState.Error(
+                            error.message?.takeIf { it.isNotBlank() }
+                                ?: "Could not load albums. Check your connection and try again.",
+                        )
                 }
             }
         }

@@ -32,13 +32,16 @@ class AlbumDetailsViewModel
                     repository.getAlbumById(albumId)
                 }.onSuccess { album ->
                     if (album == null) {
-                        _uiState.value = AlbumDetailsUiState.Error("Album not found")
+                        _uiState.value = AlbumDetailsUiState.Error("We could not find that album.")
                     } else {
                         _uiState.value = AlbumDetailsUiState.Success(album)
                     }
                 }.onFailure { error ->
                     _uiState.value =
-                        AlbumDetailsUiState.Error(error.message ?: "Failed to get album details")
+                        AlbumDetailsUiState.Error(
+                            error.message?.takeIf { it.isNotBlank() }
+                                ?: "Could not load album details. Check your connection and try again.",
+                        )
                 }
             }
         }

@@ -36,7 +36,7 @@ class AlbumDetailsViewModelTest {
             val viewModel = AlbumDetailsViewModel(repository, albumId = "missing")
 
             assertEquals(
-                AlbumDetailsUiState.Error("Album not found"),
+                AlbumDetailsUiState.Error("We could not find that album."),
                 viewModel.uiState.value,
             )
         }
