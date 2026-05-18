@@ -15,6 +15,10 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
+/**
+ * Provides network related dependencies
+ * The OkHttpClient is configured to use Chucker in debug builds
+ */
 internal object NetworkModule {
     @Provides
     @Singleton

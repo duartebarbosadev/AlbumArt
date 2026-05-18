@@ -2,7 +2,9 @@ package com.sample.core.data.repository
 
 import com.sample.core.data.model.Album
 
-// TODO Interface with possibility of choosing test data etc
+/**
+ * Repository interface for fetching album data.
+ */
 interface AlbumsRepository {
     suspend fun getAlbums(): List<Album>
 

@@ -7,6 +7,11 @@ import jakarta.inject.Inject
 import javax.inject.Singleton
 
 // TODO Different Impl like testImpl with hardcoded data to avoid using web always in dev environment
+
+/**
+ * A data repository implementation for [AlbumsRepository] that fetches album data from the network
+ *  and caches it in memory to avoid future requests.
+ */
 @Singleton
 class AlbumsRepositoryImpl
     @Inject

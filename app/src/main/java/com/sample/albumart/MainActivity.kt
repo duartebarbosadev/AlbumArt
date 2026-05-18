@@ -40,9 +40,11 @@ class MainActivity : ComponentActivity() {
                             entryProvider {
                                 albumListEntry(
                                     backStack = backStack,
+                                    // Shared Transition Scope for album cover animation on open and close
                                     sharedTransitionScope = this@SharedTransitionLayout,
                                 )
                                 albumDetailsEntry(
+                                    // Shared Transition Scope for album cover animation on open and close
                                     sharedTransitionScope = this@SharedTransitionLayout,
                                 )
                             },
