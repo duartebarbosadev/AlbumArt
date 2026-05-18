@@ -25,6 +25,9 @@ android {
 }
 
 dependencies {
+
+    implementation(projects.core.network)
+
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core.ktx)
     implementation(libs.material)
@@ -36,5 +39,8 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
     ksp(libs.hilt.compiler)
 
-    implementation(projects.core.network)
+    // Testing
+    androidTestImplementation(libs.mockk.android)
+    testImplementation(libs.mockk.android)
+    testImplementation(libs.kotlinx.coroutines.test)
 }

@@ -12,6 +12,9 @@ appcompat = "1.7.1"
 jetbrainsKotlinJvm = "2.3.21"
 navigation3Core = "1.1.1"
 
+coroutines = "1.11.0"
+
+mockk = "1.14.9"
 coil = "2.7.0"
 
 hilt = "2.59.2"
@@ -44,6 +47,10 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "androidxHiltNavigationCompose" }
+
+mockk-android = { module = "io.mockk:mockk-android", version.ref = "mockk" }
+
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 
 coil-kt = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
 coil-kt-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }

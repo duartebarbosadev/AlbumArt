@@ -12,3 +12,5 @@ Todo:
 - General code documentation
 - OkHttpInterceptor for logging and debugging
 - App Art
+- Cleanup other unit tests
+- Code docs
