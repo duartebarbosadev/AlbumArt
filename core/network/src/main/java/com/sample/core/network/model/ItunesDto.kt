@@ -1,8 +1,10 @@
+@file:OptIn(InternalSerializationApi::class)
+
 package com.sample.core.network.model
+import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-// TODO Fix warnings
 @Serializable
 data class ItunesRssResponseDto(
     val feed: FeedDto,
