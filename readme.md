@@ -1,6 +1,8 @@
 # AlbumArt
 
-![Play Store Icon](app/src/main/ic_launcher-playstore.png)
+<p align="center">
+  <img src="app/src/main/ic_launcher-playstore.png" width="200" alt="Play Store Icon">
+</p>
 
 Todo:
 
