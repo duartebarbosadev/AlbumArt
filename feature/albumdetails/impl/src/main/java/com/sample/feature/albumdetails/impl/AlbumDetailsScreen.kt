@@ -1,6 +1,5 @@
 package com.sample.feature.albumdetails.impl
 
-
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
@@ -43,9 +42,7 @@ fun AlbumDetailsScreen(
     sharedTransitionScope: SharedTransitionScope? = null,
     animatedVisibilityScope: AnimatedVisibilityScope? = null,
 ) {
-
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-
 
     when (val uiState = uiState) {
         is AlbumDetailsUiState.Loading -> {
@@ -68,7 +65,6 @@ fun AlbumDetailsScreen(
             }
         }
     }
-
 }
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalSharedTransitionApi::class)
@@ -85,7 +81,7 @@ fun AlbumDetail(
                     Text("Album Details")
                 },
             )
-        }
+        },
     ) { innerPadding ->
         AlbumDetailContent(
             album = album,
@@ -104,39 +100,45 @@ private fun AlbumDetailContent(
     sharedTransitionScope: SharedTransitionScope? = null,
     animatedVisibilityScope: AnimatedVisibilityScope? = null,
 ) {
-    var coverModifier = Modifier
-        .fillMaxWidth()
-        .aspectRatio(1f)
+    var coverModifier =
+        Modifier
+            .fillMaxWidth()
+            .aspectRatio(1f)
 
     var titleModifier: Modifier = Modifier
 
     if (sharedTransitionScope != null && animatedVisibilityScope != null) {
         with(sharedTransitionScope) {
-            coverModifier = coverModifier.sharedElement(
-                sharedContentState = rememberSharedContentState(
-                    key = "album-cover-${album.id ?: album.title.orEmpty()}",
-                ),
-                animatedVisibilityScope = animatedVisibilityScope,
-            )
-            titleModifier = titleModifier.sharedElement(
-                sharedContentState = rememberSharedContentState(
-                    key = "album-title-${album.id ?: album.title.orEmpty()}",
-                ),
-                animatedVisibilityScope = animatedVisibilityScope,
-            )
+            coverModifier =
+                coverModifier.sharedElement(
+                    sharedContentState =
+                        rememberSharedContentState(
+                            key = "album-cover-${album.id ?: album.title.orEmpty()}",
+                        ),
+                    animatedVisibilityScope = animatedVisibilityScope,
+                )
+            titleModifier =
+                titleModifier.sharedElement(
+                    sharedContentState =
+                        rememberSharedContentState(
+                            key = "album-title-${album.id ?: album.title.orEmpty()}",
+                        ),
+                    animatedVisibilityScope = animatedVisibilityScope,
+                )
         }
     }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(contentPadding)
-            .verticalScroll(rememberScrollState())
-            .padding(16.dp),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(contentPadding)
+                .verticalScroll(rememberScrollState())
+                .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         ElevatedCard(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
         ) {
             AsyncImage(
                 model = album.largeImageURL ?: album.imageURL,
@@ -168,7 +170,7 @@ private fun AlbumDetailContent(
         Spacer(modifier = Modifier.height(24.dp))
 
         ElevatedCard(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
         ) {
             Column(
                 modifier = Modifier.padding(16.dp),
@@ -236,21 +238,22 @@ private fun AlbumDetailRow(
 @Composable
 fun AlbumDetailsScreenPreview() {
     AlbumDetail(
-        album = Album(
-            id = "1440925843",
-            title = "Enema of the State - blink-182",
-            name = "Enema of the State",
-            artist = "blink-182",
-            imageURL = null,
-            largeImageURL = null,
-            itemCount = "12",
-            price = "$9.99",
-            currency = "USD",
-            contentType = "Album",
-            rights = "℗ 1999 UMG Recordings, Inc.",
-            releaseDate = "June 1, 1999",
-            category = "Alternative",
-            albumUrl = null,
-        ),
+        album =
+            Album(
+                id = "1440925843",
+                title = "Enema of the State - blink-182",
+                name = "Enema of the State",
+                artist = "blink-182",
+                imageURL = null,
+                largeImageURL = null,
+                itemCount = "12",
+                price = "$9.99",
+                currency = "USD",
+                contentType = "Album",
+                rights = "℗ 1999 UMG Recordings, Inc.",
+                releaseDate = "June 1, 1999",
+                category = "Alternative",
+                albumUrl = null,
+            ),
     )
 }

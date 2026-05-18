@@ -9,17 +9,17 @@ import org.junit.Rule
 import org.junit.Test
 
 class AlbumItemTest {
-
     @get:Rule
     val composeRule = createComposeRule()
 
     @Test
     fun displaysAlbumTitleArtistAndCover() {
-        val album = testAlbum(
-            title = EXPECTED_TITLE,
-            name = EXPECTED_NAME,
-            artist = EXPECTED_ARTIST,
-        )
+        val album =
+            testAlbum(
+                title = EXPECTED_TITLE,
+                name = EXPECTED_NAME,
+                artist = EXPECTED_ARTIST,
+            )
 
         composeRule.setContent {
             AlbumItem(
@@ -32,14 +32,16 @@ class AlbumItemTest {
         composeRule.onNodeWithText(EXPECTED_ARTIST).assertIsDisplayed()
         composeRule.onNodeWithContentDescription(EXPECTED_NAME).assertIsDisplayed()
     }
+
     @Test
     fun hidesArtistWhenTitleAlreadyContainsArtist() {
         composeRule.setContent {
             AlbumItem(
-                album = testAlbum(
-                    title = "$EXPECTED_TITLE - $EXPECTED_ARTIST",
-                    artist = EXPECTED_ARTIST,
-                ),
+                album =
+                    testAlbum(
+                        title = "$EXPECTED_TITLE - $EXPECTED_ARTIST",
+                        artist = EXPECTED_ARTIST,
+                    ),
                 onClick = {},
             )
         }

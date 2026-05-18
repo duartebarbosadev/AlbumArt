@@ -9,7 +9,6 @@ import org.junit.Rule
 import org.junit.Test
 
 class AlbumDetailTest {
-
     @get:Rule
     val composeRule = createComposeRule()
 
@@ -33,14 +32,15 @@ class AlbumDetailTest {
     fun hidesBlankOptionalRows() {
         composeRule.setContent {
             AlbumDetail(
-                album = testAlbum(
-                    category = null,
-                    releaseDate = "",
-                    itemCount = null,
-                    price = "",
-                    contentType = null,
-                    rights = "",
-                ),
+                album =
+                    testAlbum(
+                        category = null,
+                        releaseDate = "",
+                        itemCount = null,
+                        price = "",
+                        contentType = null,
+                        rights = "",
+                    ),
             )
         }
 

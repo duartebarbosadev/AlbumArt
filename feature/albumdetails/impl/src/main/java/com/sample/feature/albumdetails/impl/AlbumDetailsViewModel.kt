@@ -12,38 +12,39 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 @HiltViewModel(assistedFactory = AlbumDetailsViewModel.Factory::class)
-class AlbumDetailsViewModel @AssistedInject constructor(
-    private val repository: AlbumsRepository,
-    @Assisted val albumId: String,
-) : ViewModel() {
+class AlbumDetailsViewModel
+    @AssistedInject
+    constructor(
+        private val repository: AlbumsRepository,
+        @Assisted val albumId: String,
+    ) : ViewModel() {
+        private val _uiState = MutableStateFlow<AlbumDetailsUiState>(AlbumDetailsUiState.Loading)
+        val uiState = _uiState.asStateFlow()
 
-    private val _uiState = MutableStateFlow<AlbumDetailsUiState>(AlbumDetailsUiState.Loading)
-    val uiState = _uiState.asStateFlow()
+        init {
+            loadAlbum()
+        }
 
-    init {
-        loadAlbum()
-    }
-
-    private fun loadAlbum() {
-        viewModelScope.launch {
-            runCatching {
-                _uiState.value = AlbumDetailsUiState.Loading
-                repository.getAlbumById(albumId)
-            }.onSuccess { album ->
-                if (album == null) {
-                    _uiState.value = AlbumDetailsUiState.Error("Album not found")
-                } else {
-                    _uiState.value = AlbumDetailsUiState.Success(album)
+        private fun loadAlbum() {
+            viewModelScope.launch {
+                runCatching {
+                    _uiState.value = AlbumDetailsUiState.Loading
+                    repository.getAlbumById(albumId)
+                }.onSuccess { album ->
+                    if (album == null) {
+                        _uiState.value = AlbumDetailsUiState.Error("Album not found")
+                    } else {
+                        _uiState.value = AlbumDetailsUiState.Success(album)
+                    }
+                }.onFailure { error ->
+                    _uiState.value =
+                        AlbumDetailsUiState.Error(error.message ?: "Failed to get album details")
                 }
-            }.onFailure { error ->
-                _uiState.value =
-                    AlbumDetailsUiState.Error(error.message ?: "Failed to get album details")
             }
         }
-    }
 
-    @AssistedFactory
-    interface Factory {
-        fun create(albumId: String): AlbumDetailsViewModel
+        @AssistedFactory
+        interface Factory {
+            fun create(albumId: String): AlbumDetailsViewModel
+        }
     }
-}

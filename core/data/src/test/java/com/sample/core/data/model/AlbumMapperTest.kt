@@ -15,7 +15,6 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class AlbumMapperTest {
-
     @Test
     fun `maps iTunes response to albums`() {
         val expectedId = "1"
@@ -26,27 +25,33 @@ class AlbumMapperTest {
         val expectedLargeImageUrl = "https://example.com/album1-large.jpg"
         val expectedAlbumUrl = "https://example.com/album1"
 
-        val dto = ItunesRssResponseDto(
-            feed = FeedDto(
-                entry = listOf(
-                    EntryDto(
-                        name = LabelDto(expectedName),
-                        title = LabelDto(expectedTitle),
-                        artist = ArtistDto(label = expectedArtist),
-                        id = IdDto(attributes = IdAttributesDto(imId = expectedId)),
-                        images = listOf(
-                            ImageDto(label = expectedSmallImageUrl),
-                            ImageDto(label = expectedLargeImageUrl),
-                        ),
-                        link = LinkDto(
-                            attributes = LinkAttributesDto(
-                                href = expectedAlbumUrl,
+        val dto =
+            ItunesRssResponseDto(
+                feed =
+                    FeedDto(
+                        entry =
+                            listOf(
+                                EntryDto(
+                                    name = LabelDto(expectedName),
+                                    title = LabelDto(expectedTitle),
+                                    artist = ArtistDto(label = expectedArtist),
+                                    id = IdDto(attributes = IdAttributesDto(imId = expectedId)),
+                                    images =
+                                        listOf(
+                                            ImageDto(label = expectedSmallImageUrl),
+                                            ImageDto(label = expectedLargeImageUrl),
+                                        ),
+                                    link =
+                                        LinkDto(
+                                            attributes =
+                                                LinkAttributesDto(
+                                                    href = expectedAlbumUrl,
+                                                ),
+                                        ),
+                                ),
                             ),
-                        ),
                     ),
-                ),
-            ),
-        )
+            )
 
         val result = dto.toListAlbums()
 

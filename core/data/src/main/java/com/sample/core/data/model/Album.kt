@@ -20,8 +20,6 @@ data class Album(
     val albumUrl: URL?,
 )
 
-
-
 fun ItunesRssResponseDto.toListAlbums(): List<Album> =
     feed.entry.map { entry ->
         Album(
@@ -34,15 +32,23 @@ fun ItunesRssResponseDto.toListAlbums(): List<Album> =
             itemCount = entry.itemCount?.label,
             price = entry.price?.label,
             currency = entry.price?.attributes?.currency,
-            contentType = entry.contentType?.attributes?.label
-                ?: entry.contentType?.innerContentType?.attributes?.label,
+            contentType =
+                entry.contentType?.attributes?.label
+                    ?: entry.contentType
+                        ?.innerContentType
+                        ?.attributes
+                        ?.label,
             rights = entry.rights?.label,
-            releaseDate = entry.releaseDate?.attributes?.label
-                ?: entry.releaseDate?.label,
+            releaseDate =
+                entry.releaseDate?.attributes?.label
+                    ?: entry.releaseDate?.label,
             category = entry.category?.attributes?.label,
-            albumUrl = entry.link?.attributes?.href?.toUrlOrNull(),
+            albumUrl =
+                entry.link
+                    ?.attributes
+                    ?.href
+                    ?.toUrlOrNull(),
         )
     }
 
-private fun String.toUrlOrNull(): URL? =
-    runCatching { URL(this) }.getOrNull()
+private fun String.toUrlOrNull(): URL? = runCatching { URL(this) }.getOrNull()

@@ -11,18 +11,16 @@ import com.sample.feature.albumdetails.impl.AlbumDetailsScreen
 import com.sample.feature.albumdetails.impl.AlbumDetailsViewModel
 
 @OptIn(ExperimentalSharedTransitionApi::class)
-fun EntryProviderScope<NavKey>.albumDetailsEntry(
-    sharedTransitionScope: SharedTransitionScope,
-) {
-
+fun EntryProviderScope<NavKey>.albumDetailsEntry(sharedTransitionScope: SharedTransitionScope) {
     entry<AlbumDetailsNavKey> { key ->
 
-        val viewModel: AlbumDetailsViewModel = hiltViewModel(
-            key = key.albumId,
-            creationCallback = { factory: AlbumDetailsViewModel.Factory ->
-                factory.create(key.albumId)
-            }
-        )
+        val viewModel: AlbumDetailsViewModel =
+            hiltViewModel(
+                key = key.albumId,
+                creationCallback = { factory: AlbumDetailsViewModel.Factory ->
+                    factory.create(key.albumId)
+                },
+            )
 
         AlbumDetailsScreen(
             viewModel = viewModel,
