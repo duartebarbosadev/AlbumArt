@@ -1,5 +1,8 @@
 package com.sample.feature.albumlist.impl
 
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,10 +23,13 @@ import coil.compose.AsyncImage
 import com.sample.core.data.model.Album
 import com.sample.core.ui.DevicePreviews
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun AlbumListScreen(
-    onAlbumClick : (albumId: String) -> Unit,
-    viewModel: AlbumListViewModel = hiltViewModel()
+    onAlbumClick: (albumId: String) -> Unit,
+    viewModel: AlbumListViewModel = hiltViewModel(),
+    sharedTransitionScope: SharedTransitionScope? = null,
+    animatedVisibilityScope: AnimatedVisibilityScope? = null,
 ) {
 
     val albumDataState by viewModel.uiState.collectAsState()
@@ -40,15 +46,23 @@ fun AlbumListScreen(
             }
         }
         is AlbumListUiState.Success -> {
-            AlbumList(albums = albumDataState.albums, onAlbumClick)
+            AlbumList(
+                albums = albumDataState.albums,
+                onAlbumClick = onAlbumClick,
+                sharedTransitionScope = sharedTransitionScope,
+                animatedVisibilityScope = animatedVisibilityScope,
+            )
         }
     }
 }
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 private fun AlbumList(
     albums: List<Album>,
-    onAlbumClick: (String) -> Unit
+    onAlbumClick: (String) -> Unit,
+    sharedTransitionScope: SharedTransitionScope? = null,
+    animatedVisibilityScope: AnimatedVisibilityScope? = null,
 ) {
     LazyVerticalGrid(
         columns = GridCells.Adaptive(minSize = 128.dp),
@@ -59,18 +73,46 @@ private fun AlbumList(
             val album = albums[index]
             AlbumItem(
                 album = album,
-                onClick = { onAlbumClick(album.id!!) }
+                onClick = { album.id?.let(onAlbumClick) },
+                sharedTransitionScope = sharedTransitionScope,
+                animatedVisibilityScope = animatedVisibilityScope,
             )
         }
     }
 }
 
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun AlbumItem(
     album: Album,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    sharedTransitionScope: SharedTransitionScope? = null,
+    animatedVisibilityScope: AnimatedVisibilityScope? = null,
 ) {
+    var coverModifier = Modifier
+        .fillMaxWidth()
+        .aspectRatio(1f)
+
+    var titleModifier: Modifier = Modifier
+
+    if (sharedTransitionScope != null && animatedVisibilityScope != null) {
+        with(sharedTransitionScope) {
+            coverModifier = coverModifier.sharedElement(
+                sharedContentState = rememberSharedContentState(
+                    key = "album-cover-${album.id ?: album.title.orEmpty()}",
+                ),
+                animatedVisibilityScope = animatedVisibilityScope,
+            )
+            titleModifier = titleModifier.sharedElement(
+                sharedContentState = rememberSharedContentState(
+                    key = "album-title-${album.id ?: album.title.orEmpty()}",
+                ),
+                animatedVisibilityScope = animatedVisibilityScope,
+            )
+        }
+    }
+
     Card(
         onClick = onClick,
         modifier = Modifier
@@ -82,13 +124,14 @@ fun AlbumItem(
             AsyncImage(
                 model = album.largeImageURL ?: album.imageURL,
                 contentDescription = album.name ?: album.title ?: "Album cover",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(1f),
+                modifier = coverModifier,
                 contentScale = ContentScale.Crop,
             )
 
-            Text(text = album.title?: "Unknown Album")
+            Text(
+                text = album.title ?: "Unknown Album",
+                modifier = titleModifier,
+            )
             // If album title doesn't contain the artist name, show the artist name as well
             if (album.title?.contains(album.artist ?: "") == false) {
                 Text(text = album.artist?: "Unknown Artist")

@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionLayout
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.navigation3.runtime.NavKey
@@ -15,6 +17,7 @@ import com.sample.feature.albumlist.impl.navigation.albumListEntry
 import com.sample.feature.albumdetails.impl.navigation.albumDetailsEntry
 import dagger.hilt.android.AndroidEntryPoint
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,21 +28,27 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AlbumArtTheme {
+                SharedTransitionLayout {
+                    val backStack = remember { mutableStateListOf<NavKey>(AlbumListNavKey) }
 
-                val backStack = remember { mutableStateListOf<NavKey>(AlbumListNavKey) }
-
-                NavDisplay(
-                    backStack = backStack,
-                    onBack = {
-                        if (backStack.isNotEmpty()) {
-                            backStack.removeLastOrNull()
+                    NavDisplay(
+                        backStack = backStack,
+                        onBack = {
+                            if (backStack.isNotEmpty()) {
+                                backStack.removeLastOrNull()
+                            }
+                        },
+                        entryProvider = entryProvider {
+                            albumListEntry(
+                                backStack = backStack,
+                                sharedTransitionScope = this@SharedTransitionLayout,
+                            )
+                            albumDetailsEntry(
+                                sharedTransitionScope = this@SharedTransitionLayout,
+                            )
                         }
-                    },
-                    entryProvider = entryProvider {
-                        albumListEntry(backStack)
-                        albumDetailsEntry()
-                    }
-                )
+                    )
+                }
             }
         }
     }

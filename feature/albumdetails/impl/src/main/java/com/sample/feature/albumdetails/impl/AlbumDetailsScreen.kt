@@ -1,6 +1,9 @@
 package com.sample.feature.albumdetails.impl
 
 
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -33,9 +36,12 @@ import coil.compose.AsyncImage
 import com.sample.core.data.model.Album
 import com.sample.core.ui.DevicePreviews
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun AlbumDetailsScreen(
     viewModel: AlbumDetailsViewModel = hiltViewModel(),
+    sharedTransitionScope: SharedTransitionScope? = null,
+    animatedVisibilityScope: AnimatedVisibilityScope? = null,
 ) {
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -50,7 +56,9 @@ fun AlbumDetailsScreen(
 
         is AlbumDetailsUiState.Success -> {
             AlbumDetail(
-                album = uiState.album
+                album = uiState.album,
+                sharedTransitionScope = sharedTransitionScope,
+                animatedVisibilityScope = animatedVisibilityScope,
             )
         }
 
@@ -63,9 +71,13 @@ fun AlbumDetailsScreen(
 
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalSharedTransitionApi::class)
 @Composable
-fun AlbumDetail(album: Album) {
+fun AlbumDetail(
+    album: Album,
+    sharedTransitionScope: SharedTransitionScope? = null,
+    animatedVisibilityScope: AnimatedVisibilityScope? = null,
+) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -78,15 +90,43 @@ fun AlbumDetail(album: Album) {
         AlbumDetailContent(
             album = album,
             contentPadding = innerPadding,
+            sharedTransitionScope = sharedTransitionScope,
+            animatedVisibilityScope = animatedVisibilityScope,
         )
     }
 }
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 private fun AlbumDetailContent(
     album: Album,
     contentPadding: PaddingValues,
+    sharedTransitionScope: SharedTransitionScope? = null,
+    animatedVisibilityScope: AnimatedVisibilityScope? = null,
 ) {
+    var coverModifier = Modifier
+        .fillMaxWidth()
+        .aspectRatio(1f)
+
+    var titleModifier: Modifier = Modifier
+
+    if (sharedTransitionScope != null && animatedVisibilityScope != null) {
+        with(sharedTransitionScope) {
+            coverModifier = coverModifier.sharedElement(
+                sharedContentState = rememberSharedContentState(
+                    key = "album-cover-${album.id ?: album.title.orEmpty()}",
+                ),
+                animatedVisibilityScope = animatedVisibilityScope,
+            )
+            titleModifier = titleModifier.sharedElement(
+                sharedContentState = rememberSharedContentState(
+                    key = "album-title-${album.id ?: album.title.orEmpty()}",
+                ),
+                animatedVisibilityScope = animatedVisibilityScope,
+            )
+        }
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -101,9 +141,7 @@ private fun AlbumDetailContent(
             AsyncImage(
                 model = album.largeImageURL ?: album.imageURL,
                 contentDescription = album.name ?: album.title ?: "Album cover",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(1f),
+                modifier = coverModifier,
                 contentScale = ContentScale.Crop,
             )
             // TODO Maybe a background diffusion color based on the album cover's dominant color
@@ -115,6 +153,7 @@ private fun AlbumDetailContent(
             text = album.name ?: album.title ?: "Unknown Album",
             style = MaterialTheme.typography.headlineSmall,
             textAlign = TextAlign.Center,
+            modifier = titleModifier,
         )
 
         Spacer(modifier = Modifier.height(8.dp))
