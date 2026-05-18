@@ -41,6 +41,6 @@ dependencies {
 
     // Testing
     androidTestImplementation(libs.mockk.android)
-    testImplementation(libs.mockk.android)
+    testImplementation(libs.mockk)
     testImplementation(libs.kotlinx.coroutines.test)
 }
