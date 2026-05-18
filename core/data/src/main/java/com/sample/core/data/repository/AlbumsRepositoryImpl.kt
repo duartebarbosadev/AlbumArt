@@ -4,8 +4,10 @@ import com.sample.core.data.model.Album
 import com.sample.core.data.model.toListAlbums
 import com.sample.core.network.NetworkRequests
 import jakarta.inject.Inject
+import javax.inject.Singleton
 
 // TODO Different Impl like testImpl with hardcoded data to avoid using web always in dev environment
+@Singleton
 class AlbumsRepositoryImpl
     @Inject
     constructor(
@@ -14,8 +16,9 @@ class AlbumsRepositoryImpl
         private val albumsCache = mutableListOf<Album>()
 
         override suspend fun getAlbums(): List<Album> {
+            val albums = networkRequests.getItunesRss().toListAlbums()
             albumsCache.clear()
-            albumsCache.addAll(networkRequests.getItunesRss().toListAlbums())
+            albumsCache.addAll(albums)
             return albumsCache
         }
 
