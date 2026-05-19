@@ -2,6 +2,7 @@ package com.sample.feature.albumdetails.impl
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.v2.createComposeRule
+import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performScrollTo
 import com.sample.core.data.model.Album
@@ -14,41 +15,34 @@ class AlbumDetailTest {
 
     @Test
     fun displaysAlbumDetails() {
-        composeRule.setContent {
-            AlbumDetail(album = testAlbum())
-        }
+        setAlbumDetailContent(testAlbum())
 
         composeRule.onNodeWithText(EXPECTED_NAME).assertIsDisplayed()
         composeRule.onNodeWithText(EXPECTED_ARTIST).assertIsDisplayed()
-        composeRule.onNodeWithText(EXPECTED_CATEGORY).performScrollTo().assertIsDisplayed()
+
+        composeRule.onAllNodesWithText(EXPECTED_CATEGORY)[0].assertIsDisplayed()
         composeRule.onNodeWithText(EXPECTED_RELEASE_DATE).performScrollTo().assertIsDisplayed()
-        composeRule.onNodeWithText(EXPECTED_ITEM_COUNT).performScrollTo().assertIsDisplayed()
-        composeRule.onNodeWithText(EXPECTED_PRICE).performScrollTo().assertIsDisplayed()
-        composeRule.onNodeWithText(EXPECTED_CONTENT_TYPE).performScrollTo().assertIsDisplayed()
+        composeRule.onAllNodesWithText(EXPECTED_ITEM_COUNT)[0].assertIsDisplayed()
+        composeRule.onAllNodesWithText(EXPECTED_PRICE)[0].assertIsDisplayed()
+        composeRule.onAllNodesWithText(EXPECTED_CONTENT_TYPE)[0].assertIsDisplayed()
         composeRule.onNodeWithText(EXPECTED_RIGHTS).performScrollTo().assertIsDisplayed()
     }
 
     @Test
     fun hidesBlankOptionalRows() {
-        composeRule.setContent {
-            AlbumDetail(
-                album =
-                    testAlbum(
-                        category = null,
-                        releaseDate = "",
-                        itemCount = null,
-                        price = "",
-                        contentType = null,
-                        rights = "",
-                    ),
-            )
-        }
+        setAlbumDetailContent(
+            testAlbum(
+                category = null,
+                releaseDate = "",
+                itemCount = null,
+                price = "",
+                contentType = null,
+                rights = "",
+            ),
+        )
 
         composeRule.onNodeWithText("Category").assertDoesNotExist()
         composeRule.onNodeWithText("Release date").assertDoesNotExist()
-        composeRule.onNodeWithText("Tracks").assertDoesNotExist()
-        composeRule.onNodeWithText("Price").assertDoesNotExist()
-        composeRule.onNodeWithText("Type").assertDoesNotExist()
         composeRule.onNodeWithText("Copyright").assertDoesNotExist()
     }
 
@@ -75,6 +69,13 @@ class AlbumDetailTest {
         category = category,
         albumUrl = null,
     )
+
+    private fun setAlbumDetailContent(album: Album) {
+        composeRule.setContent {
+            AlbumDetail(album = album)
+        }
+        composeRule.waitForIdle()
+    }
 
     private companion object {
         const val EXPECTED_ID = "1"

@@ -28,18 +28,19 @@ class AlbumItemTest {
             )
         }
 
-        composeRule.onNodeWithText(EXPECTED_TITLE).assertIsDisplayed()
+        composeRule.onNodeWithText(EXPECTED_NAME).assertIsDisplayed()
         composeRule.onNodeWithText(EXPECTED_ARTIST).assertIsDisplayed()
         composeRule.onNodeWithContentDescription(EXPECTED_NAME).assertIsDisplayed()
     }
 
     @Test
-    fun showsArtistWhenTitleAlreadyContainsArtist() {
+    fun fallsBackToTitleWhenNameIsMissing() {
         composeRule.setContent {
             AlbumItem(
                 album =
                     testAlbum(
                         title = "$EXPECTED_TITLE - $EXPECTED_ARTIST",
+                        name = null,
                         artist = EXPECTED_ARTIST,
                     ),
                 onClick = {},
@@ -53,7 +54,7 @@ class AlbumItemTest {
     private fun testAlbum(
         id: String = EXPECTED_ID,
         title: String = EXPECTED_TITLE,
-        name: String = EXPECTED_NAME,
+        name: String? = EXPECTED_NAME,
         artist: String = EXPECTED_ARTIST,
     ) = Album(
         id = id,
