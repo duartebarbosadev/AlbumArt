@@ -3,4 +3,6 @@
     <string name="error_loading_albums_message">Nem sikerült betölteni az albumokat. Ellenőrizze az internetkapcsolatát, és próbálja újra.</string>
     <string name="error_loading_albums_title">Nem sikerült betölteni az albumokat</string>
     <string name="loading_albums_list">Betöltés…</string>
+    <string name="action_retry">Újra</string>
+    <string name="search_albums_hint">Albumok keresése</string>
 </resources>

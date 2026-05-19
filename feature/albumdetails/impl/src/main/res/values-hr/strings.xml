@@ -13,4 +13,5 @@
     <string name="loading_album_details">Učitavanje…</string>
     <string name="section_album_info">Informacije o albumu</string>
     <string name="unknown_artist">Nepoznat izvođač</string>
+    <string name="action_retry">Pokušaj ponovo</string>
 </resources>

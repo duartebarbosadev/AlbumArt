@@ -13,4 +13,5 @@
     <string name="loading_album_details">Chargement…</string>
     <string name="section_album_info">Infos sur l\'album</string>
     <string name="unknown_artist">Artiste inconnu</string>
+    <string name="action_retry">Réessayer</string>
 </resources>

@@ -3,4 +3,6 @@
     <string name="error_loading_albums_message">Nije moguće učitati albume. Proverite vezu i pokušajte ponovo.</string>
     <string name="error_loading_albums_title">Nije moguće učitati albume</string>
     <string name="loading_albums_list">Učitavanje…</string>
+    <string name="action_retry">Pokušaj ponovo</string>
+    <string name="search_albums_hint">Pretraži albume</string>
 </resources>

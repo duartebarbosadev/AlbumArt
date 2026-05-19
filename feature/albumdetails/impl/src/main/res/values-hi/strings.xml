@@ -13,4 +13,5 @@
     <string name="loading_album_details">लोड हो रहा है…</string>
     <string name="section_album_info">एल्बम की जानकारी</string>
     <string name="unknown_artist">अज्ञात कलाकार</string>
+    <string name="action_retry">पुनः प्रयास करें</string>
 </resources>

@@ -3,4 +3,6 @@
     <string name="error_loading_albums_message">Не удалось загрузить альбомы. Проверьте подключение и повторите попытку.</string>
     <string name="error_loading_albums_title">Не удалось загрузить альбомы</string>
     <string name="loading_albums_list">Загрузка…</string>
+    <string name="action_retry">Повторить</string>
+    <string name="search_albums_hint">Поиск альбомов</string>
 </resources>

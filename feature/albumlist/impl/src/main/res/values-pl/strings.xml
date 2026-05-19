@@ -3,4 +3,6 @@
     <string name="error_loading_albums_message">Nie można załadować albumów. Sprawdź połączenie i spróbuj ponownie.</string>
     <string name="error_loading_albums_title">Nie można załadować albumów</string>
     <string name="loading_albums_list">Ładowanie…</string>
+    <string name="action_retry">Spróbuj ponownie</string>
+    <string name="search_albums_hint">Szukaj albumów</string>
 </resources>

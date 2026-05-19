@@ -3,4 +3,6 @@
     <string name="error_loading_albums_message">Alben konnten nicht geladen werden. Überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.</string>
     <string name="error_loading_albums_title">Alben konnten nicht geladen werden</string>
     <string name="loading_albums_list">Lädt…</string>
+    <string name="action_retry">Erneut versuchen</string>
+    <string name="search_albums_hint">Alben suchen</string>
 </resources>
