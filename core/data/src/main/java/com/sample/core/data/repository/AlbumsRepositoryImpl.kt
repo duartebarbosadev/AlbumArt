@@ -18,20 +18,16 @@ class AlbumsRepositoryImpl
     constructor(
         private val networkRequests: NetworkRequests,
     ) : AlbumsRepository {
-        private val albumsCache = mutableListOf<Album>()
+        private var albumsCache: List<Album> = emptyList()
 
         override suspend fun getAlbums(): List<Album> {
-            val albums = networkRequests.getItunesRss().toListAlbums()
-            albumsCache.clear()
-            albumsCache.addAll(albums)
+            albumsCache = networkRequests.getItunesRss().toListAlbums()
             return albumsCache
         }
 
         override suspend fun getAlbumById(albumId: String): Album? {
-            // If the album exists in cache, return it, if not, fetch the albums and then try to return the requested album
-            if (albumsCache.any { it.id == albumId }) {
-                return albumsCache.first { it.id == albumId }
-            } else {
+            // If there's no album with that ID cached, get the albums first
+            if (albumsCache.none { it.id == albumId }) {
                 getAlbums()
             }
             return albumsCache.firstOrNull { it.id == albumId }
