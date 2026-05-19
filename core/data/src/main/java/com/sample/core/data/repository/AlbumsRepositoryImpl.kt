@@ -21,6 +21,9 @@ class AlbumsRepositoryImpl
         private var albumsCache: List<Album> = emptyList()
 
         override suspend fun getAlbums(): List<Album> {
+            if (albumsCache.isNotEmpty()) {
+                return albumsCache
+            }
             albumsCache = networkRequests.getItunesRss().toListAlbums()
             return albumsCache
         }
