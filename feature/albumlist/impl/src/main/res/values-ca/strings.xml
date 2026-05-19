@@ -3,4 +3,6 @@
     <string name="error_loading_albums_message">No s\'han pogut carregar els àlbums. Comprova la connexió i torna-ho a provar.</string>
     <string name="error_loading_albums_title">No s\'han pogut carregar els àlbums</string>
     <string name="loading_albums_list">S\'està carregant...</string>
+    <string name="action_retry">Torna-ho a provar</string>
+    <string name="search_albums_hint">Cerca àlbums</string>
 </resources>

@@ -3,4 +3,6 @@
     <string name="error_loading_albums_message">Kunne ikke laste inn album. Sjekk tilkoblingen din og prøv igjen.</string>
     <string name="error_loading_albums_title">Kunne ikke laste inn album</string>
     <string name="loading_albums_list">Laster inn …</string>
+    <string name="action_retry">Prøv igjen</string>
+    <string name="search_albums_hint">Søk i album</string>
 </resources>

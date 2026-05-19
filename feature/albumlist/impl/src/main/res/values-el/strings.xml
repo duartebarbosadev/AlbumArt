@@ -3,4 +3,6 @@
     <string name="error_loading_albums_message">Δεν ήταν δυνατή η φόρτωση των άλμπουμ. Ελέγξτε τη σύνδεσή σας και δοκιμάστε ξανά.</string>
     <string name="error_loading_albums_title">Δεν ήταν δυνατή η φόρτωση των άλμπουμ</string>
     <string name="loading_albums_list">Φόρτωση…</string>
+    <string name="action_retry">Δοκιμάστε ξανά</string>
+    <string name="search_albums_hint">Αναζήτηση άλμπουμ</string>
 </resources>

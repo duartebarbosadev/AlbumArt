@@ -3,4 +3,6 @@
     <string name="error_loading_albums_message">Impossible de charger les albums. Vérifiez votre connexion et réessayez.</string>
     <string name="error_loading_albums_title">Impossible de charger les albums</string>
     <string name="loading_albums_list">Chargement…</string>
+    <string name="action_retry">Réessayer</string>
+    <string name="search_albums_hint">Rechercher des albums</string>
 </resources>

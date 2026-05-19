@@ -3,4 +3,6 @@
     <string name="error_loading_albums_message">Albumy sa nepodarilo načítať. Skontrolujte pripojenie a skúste to znova.</string>
     <string name="error_loading_albums_title">Albumy sa nepodarilo načítať</string>
     <string name="loading_albums_list">Načítava sa…</string>
+    <string name="action_retry">Skúsiť znova</string>
+    <string name="search_albums_hint">Hľadať albumy</string>
 </resources>

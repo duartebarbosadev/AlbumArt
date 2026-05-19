@@ -3,4 +3,6 @@
     <string name="error_loading_albums_message">Nu s-au putut încărca albumele. Verificați conexiunea și încercați din nou.</string>
     <string name="error_loading_albums_title">Nu s-au putut încărca albumele</string>
     <string name="loading_albums_list">Se încarcă…</string>
+    <string name="action_retry">Încercați din nou</string>
+    <string name="search_albums_hint">Căutați albume</string>
 </resources>

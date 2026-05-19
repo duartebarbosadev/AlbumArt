@@ -3,4 +3,6 @@
     <string name="error_loading_albums_message">Det gick inte att läsa in album. Kontrollera anslutningen och försök igen.</string>
     <string name="error_loading_albums_title">Det gick inte att läsa in album</string>
     <string name="loading_albums_list">Läser in…</string>
+    <string name="action_retry">Försök igen</string>
+    <string name="search_albums_hint">Sök album</string>
 </resources>
