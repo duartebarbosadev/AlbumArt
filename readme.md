@@ -7,6 +7,4 @@
 Todo:
 
 - Instead of loading message, show skeleton
-- Fix album details & cover shared transition
-- Improve UI
-- Prettier topbar
+- Install splashscreen

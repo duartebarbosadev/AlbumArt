@@ -6,4 +6,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class AlbumDetailsNavKey(
     val albumId: String,
+    val bandName: String? = null,
 ) : NavKey

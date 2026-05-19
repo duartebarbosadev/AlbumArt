@@ -3,16 +3,13 @@ package com.sample.feature.albumdetails.impl
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,20 +17,17 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -42,10 +36,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -81,43 +75,24 @@ fun AlbumDetailsScreen(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalSharedTransitionApi::class)
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun AlbumDetail(
     album: Album,
     sharedTransitionScope: SharedTransitionScope? = null,
     animatedVisibilityScope: AnimatedVisibilityScope? = null,
 ) {
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = "Album Details",
-                        fontWeight = FontWeight.Bold,
-                    )
-                },
-                colors =
-                    TopAppBarDefaults.topAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.92f),
-                    ),
-            )
-        },
-    ) { innerPadding ->
-        AlbumDetailContent(
-            album = album,
-            contentPadding = innerPadding,
-            sharedTransitionScope = sharedTransitionScope,
-            animatedVisibilityScope = animatedVisibilityScope,
-        )
-    }
+    AlbumDetailContent(
+        album = album,
+        sharedTransitionScope = sharedTransitionScope,
+        animatedVisibilityScope = animatedVisibilityScope,
+    )
 }
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 private fun AlbumDetailContent(
     album: Album,
-    contentPadding: PaddingValues,
     sharedTransitionScope: SharedTransitionScope? = null,
     animatedVisibilityScope: AnimatedVisibilityScope? = null,
 ) {
@@ -127,25 +102,54 @@ private fun AlbumDetailContent(
             .aspectRatio(1f)
 
     var titleModifier: Modifier = Modifier
+    var artistModifier: Modifier = Modifier
 
     if (sharedTransitionScope != null && animatedVisibilityScope != null) {
         with(sharedTransitionScope) {
             coverModifier =
-                coverModifier.sharedElement(
-                    sharedContentState =
-                        rememberSharedContentState(
-                            key = "album-cover-${album.id ?: album.title.orEmpty()}",
-                        ),
-                    animatedVisibilityScope = animatedVisibilityScope,
-                )
+                coverModifier
+                    .sharedElement(
+                        sharedContentState =
+                            rememberSharedContentState(
+                                key = "album-cover-${album.id ?: album.title.orEmpty()}",
+                            ),
+                        animatedVisibilityScope = animatedVisibilityScope,
+                        zIndexInOverlay = 1f,
+                    )
             titleModifier =
-                titleModifier.sharedElement(
-                    sharedContentState =
-                        rememberSharedContentState(
-                            key = "album-title-${album.id ?: album.title.orEmpty()}",
-                        ),
-                    animatedVisibilityScope = animatedVisibilityScope,
-                )
+                titleModifier
+                    .sharedBounds(
+                        sharedContentState =
+                            rememberSharedContentState(
+                                key = "album-title-${album.id ?: album.title.orEmpty()}",
+                            ),
+                        animatedVisibilityScope = animatedVisibilityScope,
+                        enter = fadeIn(),
+                        exit = fadeOut(),
+                        resizeMode =
+                            SharedTransitionScope.ResizeMode.scaleToBounds(
+                                contentScale = ContentScale.FillWidth,
+                                alignment = Alignment.Center,
+                            ),
+                        zIndexInOverlay = 2f,
+                    )
+            artistModifier =
+                artistModifier
+                    .sharedBounds(
+                        sharedContentState =
+                            rememberSharedContentState(
+                                key = "album-artist-${album.id ?: album.title.orEmpty()}",
+                            ),
+                        animatedVisibilityScope = animatedVisibilityScope,
+                        enter = fadeIn(),
+                        exit = fadeOut(),
+                        resizeMode =
+                            SharedTransitionScope.ResizeMode.scaleToBounds(
+                                contentScale = ContentScale.FillWidth,
+                                alignment = Alignment.Center,
+                            ),
+                        zIndexInOverlay = 2f,
+                    )
         }
     }
 
@@ -153,43 +157,32 @@ private fun AlbumDetailContent(
         modifier =
             Modifier
                 .fillMaxSize()
-                .breathingAlbumBackground()
-                .padding(contentPadding),
+                .albumDetailsBackdrop(),
     ) {
         Column(
             modifier =
                 Modifier
                     .fillMaxSize()
                     .verticalScroll(rememberScrollState())
-                    .padding(20.dp),
+                    .padding(horizontal = 20.dp, vertical = 18.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            ElevatedCard(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(32.dp),
-                colors =
-                    CardDefaults.elevatedCardColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
-                    ),
-                elevation = CardDefaults.elevatedCardElevation(defaultElevation = 6.dp),
-            ) {
-                AsyncImage(
-                    model = album.largeImageURL ?: album.imageURL,
-                    contentDescription = album.name ?: album.title ?: "Album cover",
-                    modifier =
-                        coverModifier
-                            .clip(RoundedCornerShape(32.dp))
-                            .background(MaterialTheme.colorScheme.surfaceContainerHighest),
-                    contentScale = ContentScale.Crop,
-                )
-            }
+            AsyncImage(
+                model = album.largeImageURL ?: album.imageURL,
+                contentDescription = album.name ?: album.title ?: "Album cover",
+                modifier =
+                    coverModifier
+                        .clip(RoundedCornerShape(22.dp))
+                        .background(MaterialTheme.colorScheme.surfaceContainerHighest),
+                contentScale = ContentScale.Crop,
+            )
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(26.dp))
 
             Text(
                 text = album.name ?: album.title ?: "Unknown Album",
                 style = MaterialTheme.typography.headlineMedium,
-                fontWeight = FontWeight.Bold,
+                fontWeight = FontWeight.Black,
                 textAlign = TextAlign.Center,
                 modifier = titleModifier,
             )
@@ -198,6 +191,7 @@ private fun AlbumDetailContent(
 
             Text(
                 text = album.artist ?: "Unknown Artist",
+                modifier = artistModifier,
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 textAlign = TextAlign.Center,
@@ -205,128 +199,117 @@ private fun AlbumDetailContent(
 
             val category = album.category
             if (!category.isNullOrBlank()) {
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(18.dp))
                 Surface(
-                    shape = RoundedCornerShape(50),
-                    color = MaterialTheme.colorScheme.primaryContainer,
-                    contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                    shape = CircleShape,
+                    color = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onPrimary,
                 ) {
                     Text(
-                        text = category,
-                        modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+                        text = category.uppercase(),
+                        modifier = Modifier.padding(horizontal = 18.dp, vertical = 8.dp),
                         style = MaterialTheme.typography.labelLarge,
-                        fontWeight = FontWeight.SemiBold,
+                        fontWeight = FontWeight.ExtraBold,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
                     )
                 }
             }
 
-            Spacer(modifier = Modifier.height(28.dp))
+            Spacer(modifier = Modifier.height(30.dp))
 
-            ElevatedCard(
+            Surface(
                 modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(28.dp),
-                colors =
-                    CardDefaults.elevatedCardColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
-                    ),
+                shape = RoundedCornerShape(8.dp),
+                color = MaterialTheme.colorScheme.surfaceContainerLow.copy(alpha = 0.86f),
+                contentColor = MaterialTheme.colorScheme.onSurface,
             ) {
-                Column(
-                    modifier = Modifier.padding(20.dp),
-                    verticalArrangement = Arrangement.spacedBy(14.dp),
+                Row(
+                    modifier = Modifier.padding(18.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Text(
-                        text = "Album info",
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                    )
-
-                    AlbumDetailRow(
-                        label = "Category",
-                        value = album.category,
-                    )
-
-                    AlbumDetailRow(
-                        label = "Release date",
-                        value = album.releaseDate,
-                    )
-
-                    AlbumDetailRow(
-                        label = "Tracks",
-                        value = album.itemCount,
-                    )
-
-                    AlbumDetailRow(
-                        label = "Price",
-                        value = album.price,
-                    )
-
-                    AlbumDetailRow(
-                        label = "Type",
-                        value = album.contentType,
-                    )
-
-                    AlbumDetailRow(
-                        label = "Copyright",
-                        value = album.rights,
-                    )
+                    AlbumStat(label = "Tracks", value = album.itemCount)
+                    AlbumStat(label = "Price", value = album.price)
+                    AlbumStat(label = "Type", value = album.contentType)
                 }
+            }
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(0.dp),
+            ) {
+                Text(
+                    text = "Album info",
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Black,
+                    modifier = Modifier.padding(bottom = 8.dp),
+                )
+
+                AlbumDetailRow(
+                    label = "Category",
+                    value = album.category,
+                )
+
+                AlbumDetailRow(
+                    label = "Release date",
+                    value = album.releaseDate,
+                )
+
+                AlbumDetailRow(
+                    label = "Tracks",
+                    value = album.itemCount,
+                )
+
+                AlbumDetailRow(
+                    label = "Price",
+                    value = album.price,
+                )
+
+                AlbumDetailRow(
+                    label = "Type",
+                    value = album.contentType,
+                )
+
+                AlbumDetailRow(
+                    label = "Copyright",
+                    value = album.rights,
+                )
             }
         }
     }
 }
 
 @Composable
-private fun Modifier.breathingAlbumBackground(): Modifier {
+private fun Modifier.albumDetailsBackdrop(): Modifier {
     val colorScheme = MaterialTheme.colorScheme
-    val infiniteTransition = rememberInfiniteTransition(label = "album-background")
-    val pulse by
-        infiniteTransition.animateFloat(
-            initialValue = 0.82f,
-            targetValue = 1.18f,
-            animationSpec =
-                infiniteRepeatable(
-                    animation = tween(durationMillis = 4200),
-                    repeatMode = RepeatMode.Reverse,
-                ),
-            label = "album-background-pulse",
-        )
 
     return drawBehind {
         drawRect(colorScheme.surface)
         drawRect(
             brush =
-                Brush.radialGradient(
+                Brush.linearGradient(
                     colors =
                         listOf(
-                            colorScheme.primaryContainer.copy(alpha = 0.36f * pulse),
-                            Color.Transparent,
+                            colorScheme.primaryContainer.copy(alpha = 0.34f),
+                            colorScheme.surface.copy(alpha = 0.0f),
                         ),
-                    center = Offset(size.width * 0.12f, size.height * 0.08f),
-                    radius = size.maxDimension * 0.78f * pulse,
+                    start = Offset.Zero,
+                    end = Offset(size.width, size.height * 0.7f),
                 ),
         )
         drawRect(
             brush =
-                Brush.radialGradient(
+                Brush.linearGradient(
                     colors =
                         listOf(
-                            colorScheme.tertiaryContainer.copy(alpha = 0.28f * pulse),
-                            Color.Transparent,
+                            colorScheme.surface.copy(alpha = 0.0f),
+                            colorScheme.tertiaryContainer.copy(alpha = 0.2f),
                         ),
-                    center = Offset(size.width * 0.96f, size.height * 0.38f),
-                    radius = size.maxDimension * 0.62f * pulse,
-                ),
-        )
-        drawRect(
-            brush =
-                Brush.radialGradient(
-                    colors =
-                        listOf(
-                            colorScheme.secondaryContainer.copy(alpha = 0.22f * (2f - pulse)),
-                            Color.Transparent,
-                        ),
-                    center = Offset(size.width * 0.44f, size.height * 1.02f),
-                    radius = size.maxDimension * 0.7f * (2f - pulse),
+                    start = Offset(size.width, size.height * 0.15f),
+                    end = Offset(0f, size.height),
                 ),
         )
     }
@@ -339,22 +322,47 @@ private fun AlbumDetailRow(
 ) {
     if (value.isNullOrBlank()) return
 
-    Column {
+    Column(modifier = Modifier.padding(vertical = 12.dp)) {
+        Row(verticalAlignment = Alignment.Top) {
+            Text(
+                text = label,
+                modifier = Modifier.width(112.dp),
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                fontWeight = FontWeight.Bold,
+            )
+
+            Text(
+                text = value,
+                modifier = Modifier.weight(1f),
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurface,
+            )
+        }
+
+        HorizontalDivider()
+    }
+}
+
+@Composable
+private fun AlbumStat(
+    label: String,
+    value: String?,
+) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(
+            text = value.takeUnless { it.isNullOrBlank() } ?: "-",
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.Black,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+        )
         Text(
             text = label,
-            style = MaterialTheme.typography.labelMedium,
+            style = MaterialTheme.typography.labelSmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
-            fontWeight = FontWeight.SemiBold,
+            fontWeight = FontWeight.Bold,
         )
-
-        Text(
-            text = value,
-            style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.onSurface,
-        )
-
-        Spacer(modifier = Modifier.height(8.dp))
-        HorizontalDivider()
     }
 }
 
@@ -370,9 +378,16 @@ private fun LoadingState() {
         verticalArrangement = Arrangement.Center,
     ) {
         CircularProgressIndicator(modifier = Modifier.size(48.dp))
+        LinearProgressIndicator(
+            modifier =
+                Modifier
+                    .fillMaxWidth(0.42f)
+                    .padding(top = 18.dp)
+                    .clip(CircleShape),
+        )
         Text(
             text = "Loading album details...",
-            modifier = Modifier.padding(top = 16.dp),
+            modifier = Modifier.padding(top = 14.dp),
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
@@ -388,17 +403,14 @@ private fun ErrorState(message: String) {
                 .background(MaterialTheme.colorScheme.surface),
         contentAlignment = Alignment.Center,
     ) {
-        ElevatedCard(
+        Surface(
             modifier =
                 Modifier
                     .fillMaxWidth()
                     .padding(24.dp),
-            shape = RoundedCornerShape(28.dp),
-            colors =
-                CardDefaults.elevatedCardColors(
-                    containerColor = MaterialTheme.colorScheme.errorContainer,
-                    contentColor = MaterialTheme.colorScheme.onErrorContainer,
-                ),
+            shape = RoundedCornerShape(8.dp),
+            color = MaterialTheme.colorScheme.errorContainer,
+            contentColor = MaterialTheme.colorScheme.onErrorContainer,
         ) {
             Column(
                 modifier = Modifier.padding(24.dp),

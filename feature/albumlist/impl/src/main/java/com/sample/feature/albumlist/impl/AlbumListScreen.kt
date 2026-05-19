@@ -3,27 +3,30 @@ package com.sample.feature.albumlist.impl
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -40,71 +43,46 @@ import coil.compose.AsyncImage
 import com.sample.core.data.model.Album
 import com.sample.core.ui.DevicePreviews
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalSharedTransitionApi::class)
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun AlbumListScreen(
-    onAlbumClick: (albumId: String) -> Unit,
+    onAlbumClick: (album: Album) -> Unit,
     viewModel: AlbumListViewModel = hiltViewModel(),
     sharedTransitionScope: SharedTransitionScope? = null,
     animatedVisibilityScope: AnimatedVisibilityScope? = null,
 ) {
     val albumDataState by viewModel.uiState.collectAsState()
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Column {
-                        Text(
-                            text = "Album Art",
-                            style = MaterialTheme.typography.titleLarge,
-                            fontWeight = FontWeight.Bold,
-                        )
-                        Text(
-                            text = "Top iTunes albums",
-                            style = MaterialTheme.typography.labelLarge,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        )
-                    }
-                },
-                colors =
-                    TopAppBarDefaults.topAppBarColors(
-                        containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.92f),
+    Box(
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .background(
+                    Brush.verticalGradient(
+                        colors =
+                            listOf(
+                                MaterialTheme.colorScheme.surfaceContainerLow,
+                                MaterialTheme.colorScheme.surface,
+                            ),
                     ),
-            )
-        },
-    ) { innerPadding ->
-        Box(
-            modifier =
-                Modifier
-                    .fillMaxSize()
-                    .background(
-                        Brush.verticalGradient(
-                            colors =
-                                listOf(
-                                    MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.45f),
-                                    MaterialTheme.colorScheme.surface,
-                                ),
-                        ),
-                    ).padding(innerPadding),
-        ) {
-            when (val albumDataState = albumDataState) {
-                is AlbumListUiState.Loading -> {
-                    LoadingState()
-                }
+                ),
+    ) {
+        when (val albumDataState = albumDataState) {
+            is AlbumListUiState.Loading -> {
+                LoadingState()
+            }
 
-                is AlbumListUiState.Error -> {
-                    ErrorState(message = albumDataState.message)
-                }
+            is AlbumListUiState.Error -> {
+                ErrorState(message = albumDataState.message)
+            }
 
-                is AlbumListUiState.Success -> {
-                    AlbumList(
-                        albums = albumDataState.albums,
-                        onAlbumClick = onAlbumClick,
-                        sharedTransitionScope = sharedTransitionScope,
-                        animatedVisibilityScope = animatedVisibilityScope,
-                    )
-                }
+            is AlbumListUiState.Success -> {
+                AlbumList(
+                    albums = albumDataState.albums,
+                    onAlbumClick = onAlbumClick,
+                    sharedTransitionScope = sharedTransitionScope,
+                    animatedVisibilityScope = animatedVisibilityScope,
+                )
             }
         }
     }
@@ -114,22 +92,24 @@ fun AlbumListScreen(
 @Composable
 private fun AlbumList(
     albums: List<Album>,
-    onAlbumClick: (String) -> Unit,
+    onAlbumClick: (Album) -> Unit,
     sharedTransitionScope: SharedTransitionScope? = null,
     animatedVisibilityScope: AnimatedVisibilityScope? = null,
 ) {
     LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = 128.dp),
+        columns = GridCells.Adaptive(minSize = 142.dp),
         modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(16.dp),
-        horizontalArrangement = Arrangement.spacedBy(12.dp),
-        verticalArrangement = Arrangement.spacedBy(14.dp),
+        contentPadding = PaddingValues(start = 18.dp, top = 18.dp, end = 18.dp, bottom = 28.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        verticalArrangement = Arrangement.spacedBy(22.dp),
     ) {
-        items(albums.size) { index ->
-            val album = albums[index]
+        items(
+            items = albums,
+            key = { album -> album.id ?: album.title.orEmpty() },
+        ) { album ->
             AlbumItem(
                 album = album,
-                onClick = { album.id?.let(onAlbumClick) },
+                onClick = { onAlbumClick(album) },
                 sharedTransitionScope = sharedTransitionScope,
                 animatedVisibilityScope = animatedVisibilityScope,
             )
@@ -151,72 +131,109 @@ fun AlbumItem(
             .aspectRatio(1f)
 
     var titleModifier: Modifier = Modifier
+    var artistModifier: Modifier = Modifier
 
     if (sharedTransitionScope != null && animatedVisibilityScope != null) {
         with(sharedTransitionScope) {
             coverModifier =
-                coverModifier.sharedElement(
-                    sharedContentState =
-                        rememberSharedContentState(
-                            key = "album-cover-${album.id ?: album.title.orEmpty()}",
-                        ),
-                    animatedVisibilityScope = animatedVisibilityScope,
-                )
+                coverModifier
+                    .sharedElement(
+                        sharedContentState =
+                            rememberSharedContentState(
+                                key = "album-cover-${album.id ?: album.title.orEmpty()}",
+                            ),
+                        animatedVisibilityScope = animatedVisibilityScope,
+                        zIndexInOverlay = 1f,
+                    )
             titleModifier =
-                titleModifier.sharedElement(
-                    sharedContentState =
-                        rememberSharedContentState(
-                            key = "album-title-${album.id ?: album.title.orEmpty()}",
-                        ),
-                    animatedVisibilityScope = animatedVisibilityScope,
-                )
+                titleModifier
+                    .sharedBounds(
+                        sharedContentState =
+                            rememberSharedContentState(
+                                key = "album-title-${album.id ?: album.title.orEmpty()}",
+                            ),
+                        animatedVisibilityScope = animatedVisibilityScope,
+                        enter = fadeIn(),
+                        exit = fadeOut(),
+                        resizeMode =
+                            SharedTransitionScope.ResizeMode.scaleToBounds(
+                                contentScale = ContentScale.FillWidth,
+                                alignment = Alignment.CenterStart,
+                            ),
+                        zIndexInOverlay = 2f,
+                    )
+            artistModifier =
+                artistModifier
+                    .sharedBounds(
+                        sharedContentState =
+                            rememberSharedContentState(
+                                key = "album-artist-${album.id ?: album.title.orEmpty()}",
+                            ),
+                        animatedVisibilityScope = animatedVisibilityScope,
+                        enter = fadeIn(),
+                        exit = fadeOut(),
+                        resizeMode =
+                            SharedTransitionScope.ResizeMode.scaleToBounds(
+                                contentScale = ContentScale.FillWidth,
+                                alignment = Alignment.CenterStart,
+                            ),
+                        zIndexInOverlay = 2f,
+                    )
         }
     }
 
-    ElevatedCard(
-        onClick = onClick,
+    Column(
         modifier =
             Modifier
-                .fillMaxWidth(),
-        shape = RoundedCornerShape(24.dp),
-        colors =
-            CardDefaults.elevatedCardColors(
-                containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
-            ),
-        elevation = CardDefaults.elevatedCardElevation(defaultElevation = 4.dp),
+                .fillMaxWidth()
+                .clickable(onClick = onClick),
     ) {
-        Column(
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            modifier = Modifier.padding(bottom = 12.dp),
-        ) {
-            AsyncImage(
-                model = album.largeImageURL ?: album.imageURL,
-                contentDescription = album.name ?: album.title ?: "Album cover",
-                modifier =
-                    coverModifier
-                        .clip(RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp))
-                        .background(MaterialTheme.colorScheme.surfaceContainerHighest),
-                contentScale = ContentScale.Crop,
-            )
+        AsyncImage(
+            model = album.largeImageURL ?: album.imageURL,
+            contentDescription = album.name ?: album.title ?: "Album cover",
+            modifier =
+                coverModifier
+                    .clip(RoundedCornerShape(18.dp))
+                    .background(MaterialTheme.colorScheme.surfaceContainerHighest),
+            contentScale = ContentScale.Crop,
+        )
 
+        Spacer(modifier = Modifier.height(10.dp))
+
+        Text(
+            text = album.name ?: album.title ?: "Unknown Album",
+            modifier = titleModifier,
+            style = MaterialTheme.typography.titleSmall,
+            fontWeight = FontWeight.Bold,
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis,
+        )
+
+        val artist = album.artist
+        if (!artist.isNullOrBlank()) {
             Text(
-                text = album.title ?: "Unknown Album",
-                modifier =
-                    titleModifier
-                        .padding(horizontal = 12.dp),
-                style = MaterialTheme.typography.titleSmall,
-                fontWeight = FontWeight.SemiBold,
-                maxLines = 2,
+                text = artist,
+                modifier = artistModifier.padding(top = 2.dp),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
             )
-            // If album title doesn't contain the artist name, show the artist name as well
-            val artist = album.artist
-            if (!artist.isNullOrBlank() && album.title?.contains(artist, ignoreCase = true) != true) {
+        }
+
+        val category = album.category
+        if (!category.isNullOrBlank()) {
+            Surface(
+                modifier = Modifier.padding(top = 8.dp),
+                shape = CircleShape,
+                color = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.7f),
+                contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+            ) {
                 Text(
-                    text = artist,
-                    modifier = Modifier.padding(horizontal = 12.dp),
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    text = category,
+                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
+                    style = MaterialTheme.typography.labelSmall,
+                    fontWeight = FontWeight.SemiBold,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                 )
@@ -236,9 +253,16 @@ private fun LoadingState() {
         verticalArrangement = Arrangement.Center,
     ) {
         CircularProgressIndicator()
+        LinearProgressIndicator(
+            modifier =
+                Modifier
+                    .fillMaxWidth(0.42f)
+                    .padding(top = 18.dp)
+                    .clip(CircleShape),
+        )
         Text(
             text = "Obtaining top 100 albums...",
-            modifier = Modifier.padding(top = 16.dp),
+            modifier = Modifier.padding(top = 14.dp),
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
@@ -247,17 +271,14 @@ private fun LoadingState() {
 
 @Composable
 private fun ErrorState(message: String) {
-    ElevatedCard(
+    Surface(
         modifier =
             Modifier
                 .fillMaxWidth()
                 .padding(24.dp),
-        shape = RoundedCornerShape(28.dp),
-        colors =
-            CardDefaults.elevatedCardColors(
-                containerColor = MaterialTheme.colorScheme.errorContainer,
-                contentColor = MaterialTheme.colorScheme.onErrorContainer,
-            ),
+        shape = RoundedCornerShape(8.dp),
+        color = MaterialTheme.colorScheme.errorContainer,
+        contentColor = MaterialTheme.colorScheme.onErrorContainer,
     ) {
         Column(
             modifier = Modifier.padding(24.dp),

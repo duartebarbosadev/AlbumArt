@@ -34,7 +34,7 @@ class AlbumItemTest {
     }
 
     @Test
-    fun hidesArtistWhenTitleAlreadyContainsArtist() {
+    fun showsArtistWhenTitleAlreadyContainsArtist() {
         composeRule.setContent {
             AlbumItem(
                 album =
@@ -47,7 +47,7 @@ class AlbumItemTest {
         }
 
         composeRule.onNodeWithText("$EXPECTED_TITLE - $EXPECTED_ARTIST").assertIsDisplayed()
-        composeRule.onNodeWithText(EXPECTED_ARTIST).assertDoesNotExist()
+        composeRule.onNodeWithText(EXPECTED_ARTIST).assertIsDisplayed()
     }
 
     private fun testAlbum(

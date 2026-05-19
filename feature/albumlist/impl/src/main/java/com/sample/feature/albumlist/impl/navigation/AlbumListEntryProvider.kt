@@ -17,8 +17,15 @@ fun EntryProviderScope<NavKey>.albumListEntry(
 ) {
     entry<AlbumListNavKey> {
         AlbumListScreen(
-            onAlbumClick = { albumId ->
-                backStack.add(AlbumDetailsNavKey(albumId))
+            onAlbumClick = { album ->
+                album.id?.let { albumId ->
+                    backStack.add(
+                        AlbumDetailsNavKey(
+                            albumId = albumId,
+                            bandName = album.artist,
+                        ),
+                    )
+                }
             },
             sharedTransitionScope = sharedTransitionScope,
             animatedVisibilityScope = LocalNavAnimatedContentScope.current,
