@@ -23,7 +23,6 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -241,15 +240,8 @@ private fun LoadingState() {
         verticalArrangement = Arrangement.Center,
     ) {
         CircularProgressIndicator()
-        LinearProgressIndicator(
-            modifier =
-                Modifier
-                    .fillMaxWidth(0.42f)
-                    .padding(top = 18.dp)
-                    .clip(CircleShape),
-        )
         Text(
-            text = "Obtaining top 100 albums...",
+            text = "Loading...",
             modifier = Modifier.padding(top = 14.dp),
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -390,4 +382,10 @@ fun AlbumListScreenPreview() {
                 ),
             ),
     )
+}
+
+@DevicePreviews
+@Composable
+fun AlbumListLoadingPreview() {
+    LoadingState()
 }

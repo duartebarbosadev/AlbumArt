@@ -359,15 +359,8 @@ private fun LoadingState() {
         verticalArrangement = Arrangement.Center,
     ) {
         CircularProgressIndicator(modifier = Modifier.size(48.dp))
-        LinearProgressIndicator(
-            modifier =
-                Modifier
-                    .fillMaxWidth(0.42f)
-                    .padding(top = 18.dp)
-                    .clip(CircleShape),
-        )
         Text(
-            text = "Loading album details...",
+            text = "Loading...",
             modifier = Modifier.padding(top = 14.dp),
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -433,6 +426,12 @@ fun AlbumDetailsScreenPreview() {
                 albumUrl = null,
             ),
     )
+}
+
+@DevicePreviews
+@Composable
+fun LoadingStatePreview() {
+    LoadingState()
 }
 
 @DevicePreviews
