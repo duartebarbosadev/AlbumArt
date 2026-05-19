@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_network_unreachable">iTunesに接続できませんでした。インターネット接続を確認して、もう一度お試しください。</string>
+    <string name="error_request_failed">リクエストに問題が発生しました。後でもう一度お試しください。</string>
 </resources>

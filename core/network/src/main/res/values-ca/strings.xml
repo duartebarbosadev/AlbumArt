@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_network_unreachable">No s\'ha pogut contactar amb iTunes. Comprova la teva connexió a Internet i torna-ho a provar.</string>
+    <string name="error_request_failed">Hi ha hagut un problema amb la sol·licitud. Torna-ho a provar més tard.</string>
 </resources>

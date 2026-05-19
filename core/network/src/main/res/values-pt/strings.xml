@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_network_unreachable">Não foi possível aceder ao Itunes. Verifique a sua ligação à internet e tente novamente.</string>
+    <string name="error_request_failed">Ocorreu um problema com o pedido, tente novamente mais tarde</string>
 </resources>

@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_album_not_found">Kāore i kitea taua pukaemi.</string>
+    <string name="error_generic_album_details">I puta he hapa i te tiki taipitopito pukaemi. Whakamātauria anō ā muri ake nei.</string>
+    <string name="error_loading_album_details">Kāore i taea te uta i ngā taipitopito pukaemi. Tirohia tō hononga ka ngana anō.</string>
+    <string name="error_loading_album_title">Kāore i taea te uta pukaemi</string>
+    <string name="label_category">Kāwai</string>
+    <string name="label_copyright">Mana pupuri</string>
+    <string name="label_price">Utu</string>
+    <string name="label_release_date">Rā tukunga</string>
+    <string name="label_tracks">Ngā ara</string>
+    <string name="label_type">Momo</string>
+    <string name="loading_album_details">E utaina ana…</string>
+    <string name="section_album_info">Mōhiohio pukaemi</string>
+    <string name="unknown_artist">Kaitoi Kāore i Mōhiotia</string>
 </resources>

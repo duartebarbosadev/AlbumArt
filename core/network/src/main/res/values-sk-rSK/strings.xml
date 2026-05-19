@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_network_unreachable">Nepodarilo sa pripojiť k iTunes. Skontrolujte svoje internetové pripojenie a skúste to znova.</string>
+    <string name="error_request_failed">Vyskytol sa problém s požiadavkou, skúste to znova neskôr.</string>
 </resources>

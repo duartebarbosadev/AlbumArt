@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_loading_albums_message">Kāore i taea te uta i ngā pukaemi. Tirohia tō hononga ka ngana anō.</string>
+    <string name="error_loading_albums_title">Kāore i taea te uta i ngā pukaemi</string>
+    <string name="loading_albums_list">E utaina ana…</string>
 </resources>

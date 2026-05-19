@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_album_not_found">Не удалось найти этот альбом.</string>
+    <string name="error_generic_album_details">Произошла ошибка при получении сведений об альбоме. Повторите попытку позже.</string>
+    <string name="error_loading_album_details">Не удалось загрузить сведения об альбоме. Проверьте подключение и повторите попытку.</string>
+    <string name="error_loading_album_title">Не удалось загрузить альбом</string>
+    <string name="label_category">Категория</string>
+    <string name="label_copyright">Авторские права</string>
+    <string name="label_price">Цена</string>
+    <string name="label_release_date">Дата выпуска</string>
+    <string name="label_tracks">Треки</string>
+    <string name="label_type">Тип</string>
+    <string name="loading_album_details">Загрузка…</string>
+    <string name="section_album_info">Информация об альбоме</string>
+    <string name="unknown_artist">Неизвестный исполнитель</string>
 </resources>

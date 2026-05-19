@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_album_not_found">Albumia ei löytynyt.</string>
+    <string name="error_generic_album_details">Albumin tietoja noudettaessa tapahtui virhe. Yritä myöhemmin uudelleen.</string>
+    <string name="error_loading_album_details">Albumin tietoja ei voitu ladata. Tarkista yhteytesi ja yritä uudelleen.</string>
+    <string name="error_loading_album_title">Albumia ei voitu ladata</string>
+    <string name="label_category">Kategoria</string>
+    <string name="label_copyright">Tekijänoikeus</string>
+    <string name="label_price">Hinta</string>
+    <string name="label_release_date">Julkaisupäivä</string>
+    <string name="label_tracks">Kappaleet</string>
+    <string name="label_type">Tyyppi</string>
+    <string name="loading_album_details">Ladataan…</string>
+    <string name="section_album_info">Albumin tiedot</string>
+    <string name="unknown_artist">Tuntematon artisti</string>
 </resources>

@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_album_not_found">アルバムが見つかりませんでした。</string>
+    <string name="error_generic_album_details">アルバム詳細の取得中にエラーが発生しました。後でもう一度お試しください。</string>
+    <string name="error_loading_album_details">アルバムの詳細を読み込めませんでした。接続を確認して、もう一度お試しください。</string>
+    <string name="error_loading_album_title">アルバムを読み込めませんでした</string>
+    <string name="label_category">カテゴリ</string>
+    <string name="label_copyright">著作権</string>
+    <string name="label_price">価格</string>
+    <string name="label_release_date">リリース日</string>
+    <string name="label_tracks">トラック</string>
+    <string name="label_type">タイプ</string>
+    <string name="loading_album_details">読み込み中…</string>
+    <string name="section_album_info">アルバム情報</string>
+    <string name="unknown_artist">不明なアーティスト</string>
 </resources>

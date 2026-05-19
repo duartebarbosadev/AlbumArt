@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_loading_albums_message">Не удалось загрузить альбомы. Проверьте подключение и повторите попытку.</string>
+    <string name="error_loading_albums_title">Не удалось загрузить альбомы</string>
+    <string name="loading_albums_list">Загрузка…</string>
 </resources>

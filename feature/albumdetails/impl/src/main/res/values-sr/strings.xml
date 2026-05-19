@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_album_not_found">Nismo mogli da pronađemo taj album.</string>
+    <string name="error_generic_album_details">Došlo je do greške prilikom preuzimanja detalja o albumu. Pokušajte ponovo kasnije.</string>
+    <string name="error_loading_album_details">Nije moguće učitati detalje o albumu. Proverite vezu i pokušajte ponovo.</string>
+    <string name="error_loading_album_title">Nije moguće učitati album</string>
+    <string name="label_category">Kategorija</string>
+    <string name="label_copyright">Autorska prava</string>
+    <string name="label_price">Cena</string>
+    <string name="label_release_date">Datum objavljivanja</string>
+    <string name="label_tracks">Pesme</string>
+    <string name="label_type">Tip</string>
+    <string name="loading_album_details">Učitavanje…</string>
+    <string name="section_album_info">Informacije o albumu</string>
+    <string name="unknown_artist">Nepoznat izvođač</string>
 </resources>

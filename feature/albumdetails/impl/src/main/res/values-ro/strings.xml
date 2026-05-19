@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_album_not_found">Nu am putut găsi albumul.</string>
+    <string name="error_generic_album_details">A apărut o eroare la preluarea detaliilor albumului. Vă rugăm să încercați din nou mai târziu.</string>
+    <string name="error_loading_album_details">Nu s-au putut încărca detaliile albumului. Verificați conexiunea și încercați din nou.</string>
+    <string name="error_loading_album_title">Nu s-a putut încărca albumul</string>
+    <string name="label_category">Categorie</string>
+    <string name="label_copyright">Drepturi de autor</string>
+    <string name="label_price">Preț</string>
+    <string name="label_release_date">Data lansării</string>
+    <string name="label_tracks">Piese</string>
+    <string name="label_type">Tip</string>
+    <string name="loading_album_details">Se încarcă…</string>
+    <string name="section_album_info">Informații album</string>
+    <string name="unknown_artist">Artist necunoscut</string>
 </resources>

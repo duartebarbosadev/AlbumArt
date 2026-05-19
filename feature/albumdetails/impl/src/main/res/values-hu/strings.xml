@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_album_not_found">Nem találtuk az albumot.</string>
+    <string name="error_generic_album_details">Hiba történt az album részleteinek lekérésekor. Kérjük, próbálja újra később.</string>
+    <string name="error_loading_album_details">Nem sikerült betölteni az album részleteit. Ellenőrizze a kapcsolatot, és próbálja újra.</string>
+    <string name="error_loading_album_title">Nem sikerült betölteni az albumot</string>
+    <string name="label_category">Kategória</string>
+    <string name="label_copyright">Szerzői jog</string>
+    <string name="label_price">Ár</string>
+    <string name="label_release_date">Megjelenés dátuma</string>
+    <string name="label_tracks">Zeneszámok</string>
+    <string name="label_type">Típus</string>
+    <string name="loading_album_details">Betöltés…</string>
+    <string name="section_album_info">Album adatai</string>
+    <string name="unknown_artist">Ismeretlen előadó</string>
 </resources>

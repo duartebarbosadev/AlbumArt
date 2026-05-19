@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_network_unreachable">Δεν ήταν δυνατή η σύνδεση στο iTunes. Ελέγξτε τη σύνδεσή σας στο διαδίκτυο και δοκιμάστε ξανά.</string>
+    <string name="error_request_failed">Παρουσιάστηκε πρόβλημα με το αίτημα, δοκιμάστε ξανά αργότερα</string>
 </resources>

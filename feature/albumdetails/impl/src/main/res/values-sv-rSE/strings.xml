@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_album_not_found">Vi kunde inte hitta det albumet.</string>
+    <string name="error_generic_album_details">Ett fel uppstod när albumdetaljerna hämtades. Försök igen senare.</string>
+    <string name="error_loading_album_details">Kunde inte läsa in albumdetaljer. Kontrollera din anslutning och försök igen.</string>
+    <string name="error_loading_album_title">Kunde inte läsa in album</string>
+    <string name="label_category">Kategori</string>
+    <string name="label_copyright">Upphovsrätt</string>
+    <string name="label_price">Pris</string>
+    <string name="label_release_date">Utgivningsdatum</string>
+    <string name="label_tracks">Spår</string>
+    <string name="label_type">Typ</string>
+    <string name="loading_album_details">Laddar…</string>
+    <string name="section_album_info">Albuminformation</string>
+    <string name="unknown_artist">Okänd artist</string>
 </resources>

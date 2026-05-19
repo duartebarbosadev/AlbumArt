@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_album_not_found">Vi fant ikke det albumet.</string>
+    <string name="error_generic_album_details">Det oppsto en feil under henting av albumdetaljer. Prøv igjen senere.</string>
+    <string name="error_loading_album_details">Kunne ikke laste inn albumdetaljer. Sjekk tilkoblingen din og prøv igjen.</string>
+    <string name="error_loading_album_title">Kunne ikke laste inn album</string>
+    <string name="label_category">Kategori</string>
+    <string name="label_copyright">Opphavsrett</string>
+    <string name="label_price">Pris</string>
+    <string name="label_release_date">Utgivelsesdato</string>
+    <string name="label_tracks">Spor</string>
+    <string name="label_type">Type</string>
+    <string name="loading_album_details">Laster inn …</string>
+    <string name="section_album_info">Albuminformasjon</string>
+    <string name="unknown_artist">Ukjent artist</string>
 </resources>
