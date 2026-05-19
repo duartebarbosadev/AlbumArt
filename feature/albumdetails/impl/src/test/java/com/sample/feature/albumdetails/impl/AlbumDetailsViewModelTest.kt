@@ -1,9 +1,11 @@
 package com.sample.feature.albumdetails.impl
 
+import android.content.Context
 import com.sample.core.data.model.Album
 import com.sample.core.data.repository.AlbumsRepository
 import io.mockk.coEvery
 import io.mockk.coVerify
+import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
@@ -15,6 +17,7 @@ class AlbumDetailsViewModelTest {
     val mainDispatcherRule = MainDispatcherRule()
 
     private val repository = mockk<AlbumsRepository>()
+    private val context = mockk<Context>(relaxed = true)
 
     @Test
     fun `loads album successfully`() =
@@ -22,7 +25,12 @@ class AlbumDetailsViewModelTest {
             val album = testAlbum(id = "1")
             coEvery { repository.getAlbumById("1") } returns album
 
-            val viewModel = AlbumDetailsViewModel(repository, albumId = "1")
+            val viewModel =
+                AlbumDetailsViewModel(
+                    repository = repository,
+                    albumId = "1",
+                    context = context,
+                )
 
             assertEquals(AlbumDetailsUiState.Success(album), viewModel.uiState.value)
             coVerify(exactly = 1) { repository.getAlbumById("1") }
@@ -32,8 +40,14 @@ class AlbumDetailsViewModelTest {
     fun `shows not found error when album is missing`() =
         runTest {
             coEvery { repository.getAlbumById("missing") } returns null
+            every { context.getString(R.string.error_album_not_found) } returns "We could not find that album."
 
-            val viewModel = AlbumDetailsViewModel(repository, albumId = "missing")
+            val viewModel =
+                AlbumDetailsViewModel(
+                    repository = repository,
+                    albumId = "missing",
+                    context = context,
+                )
 
             assertEquals(
                 AlbumDetailsUiState.Error("We could not find that album."),
@@ -46,7 +60,12 @@ class AlbumDetailsViewModelTest {
         runTest {
             coEvery { repository.getAlbumById("1") } throws RuntimeException("Network failed")
 
-            val viewModel = AlbumDetailsViewModel(repository, albumId = "1")
+            val viewModel =
+                AlbumDetailsViewModel(
+                    repository = repository,
+                    albumId = "1",
+                    context = context,
+                )
 
             assertEquals(
                 AlbumDetailsUiState.Error("Network failed"),

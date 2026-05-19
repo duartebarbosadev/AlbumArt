@@ -1,5 +1,6 @@
 package com.sample.feature.albumlist.impl
 
+import android.content.Context
 import com.sample.core.data.model.Album
 import com.sample.core.data.repository.AlbumsRepository
 import io.mockk.coEvery
@@ -15,6 +16,7 @@ class AlbumListViewModelTest {
     val mainDispatcherRule = MainDispatcherRule()
 
     private val repository = mockk<AlbumsRepository>()
+    private val context = mockk<Context>(relaxed = true)
 
     @Test
     fun `loads albums successfully`() =
@@ -22,7 +24,11 @@ class AlbumListViewModelTest {
             val albums = listOf(testAlbum(id = "1"))
             coEvery { repository.getAlbums() } returns albums
 
-            val viewModel = AlbumListViewModel(repository)
+            val viewModel =
+                AlbumListViewModel(
+                    repository = repository,
+                    context = context,
+                )
 
             assertEquals(AlbumListUiState.Success(albums), viewModel.uiState.value)
             coVerify(exactly = 1) { repository.getAlbums() }
@@ -33,7 +39,11 @@ class AlbumListViewModelTest {
         runTest {
             coEvery { repository.getAlbums() } throws RuntimeException("Network failed")
 
-            val viewModel = AlbumListViewModel(repository)
+            val viewModel =
+                AlbumListViewModel(
+                    repository = repository,
+                    context = context,
+                )
 
             assertEquals(
                 AlbumListUiState.Error("Network failed"),
