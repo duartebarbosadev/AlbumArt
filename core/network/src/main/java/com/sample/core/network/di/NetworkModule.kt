@@ -13,12 +13,12 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import javax.inject.Singleton
 
-@Module
-@InstallIn(SingletonComponent::class)
 /**
  * Provides network related dependencies
  * The OkHttpClient is configured to use Chucker in debug builds
  */
+@Module
+@InstallIn(SingletonComponent::class)
 internal object NetworkModule {
     @Provides
     @Singleton
