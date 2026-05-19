@@ -143,7 +143,6 @@ fun AlbumItem(
                                 key = "album-cover-${album.id ?: album.title.orEmpty()}",
                             ),
                         animatedVisibilityScope = animatedVisibilityScope,
-                        zIndexInOverlay = 1f,
                     )
             titleModifier =
                 titleModifier
@@ -155,12 +154,6 @@ fun AlbumItem(
                         animatedVisibilityScope = animatedVisibilityScope,
                         enter = fadeIn(),
                         exit = fadeOut(),
-                        resizeMode =
-                            SharedTransitionScope.ResizeMode.scaleToBounds(
-                                contentScale = ContentScale.FillWidth,
-                                alignment = Alignment.CenterStart,
-                            ),
-                        zIndexInOverlay = 2f,
                     )
             artistModifier =
                 artistModifier
@@ -172,12 +165,7 @@ fun AlbumItem(
                         animatedVisibilityScope = animatedVisibilityScope,
                         enter = fadeIn(),
                         exit = fadeOut(),
-                        resizeMode =
-                            SharedTransitionScope.ResizeMode.scaleToBounds(
-                                contentScale = ContentScale.FillWidth,
-                                alignment = Alignment.CenterStart,
-                            ),
-                        zIndexInOverlay = 2f,
+
                     )
         }
     }
