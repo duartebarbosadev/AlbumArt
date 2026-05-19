@@ -1,0 +1,4 @@
+<resources>
+    <string name="error_request_failed">There was an issue with the request, try again later</string>
+    <string name="error_network_unreachable">Could not reach Itunes. Check your internet connection and try again.</string>
+</resources>

@@ -1,0 +1,15 @@
+<resources>
+    <string name="unknown_artist">Unknown Artist</string>
+    <string name="error_album_not_found">We could not find that album.</string>
+    <string name="error_loading_album_details">Could not load album details. Check your connection and try again.</string>
+    <string name="label_tracks">Tracks</string>
+    <string name="label_price">Price</string>
+    <string name="label_type">Type</string>
+    <string name="section_album_info">Album info</string>
+    <string name="label_category">Category</string>
+    <string name="label_release_date">Release date</string>
+    <string name="label_copyright">Copyright</string>
+    <string name="loading_album_details">Loading…</string>
+    <string name="error_loading_album_title">Could not load album</string>
+    <string name="error_generic_album_details">An error occurred while fetching the album details. Please try again later.</string>
+</resources>

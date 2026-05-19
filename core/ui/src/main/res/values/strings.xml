@@ -1,0 +1,4 @@
+<resources>
+    <string name="album_cover_content_description">Album cover</string>
+    <string name="unknown_album">Unknown Album</string>
+</resources>

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AlbumArt</string>
+    <string name="app_icon_content_description">Album Art app icon</string>
 </resources>

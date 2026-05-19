@@ -37,6 +37,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -164,15 +165,17 @@ private fun AlbumDetailContent(
             modifier =
                 Modifier
                     .fillMaxSize()
-                    .background(Brush.verticalGradient(
-                        colors =
-                            listOf(
-                                MaterialTheme.colorScheme.surface.copy(alpha = 0.18f),
-                                MaterialTheme.colorScheme.surface.copy(alpha = 0.34f),
-                                MaterialTheme.colorScheme.surface.copy(alpha = 0.78f),
-                                MaterialTheme.colorScheme.surface.copy(alpha = 0.94f),
-                            ),
-                    )),
+                    .background(
+                        Brush.verticalGradient(
+                            colors =
+                                listOf(
+                                    MaterialTheme.colorScheme.surface.copy(alpha = 0.18f),
+                                    MaterialTheme.colorScheme.surface.copy(alpha = 0.34f),
+                                    MaterialTheme.colorScheme.surface.copy(alpha = 0.78f),
+                                    MaterialTheme.colorScheme.surface.copy(alpha = 0.94f),
+                                ),
+                        ),
+                    ),
         )
 
         Column(
@@ -185,7 +188,8 @@ private fun AlbumDetailContent(
         ) {
             AsyncImage(
                 model = albumArtworkModel,
-                contentDescription = album.name ?: album.title ?: "Album cover",
+                contentDescription =
+                    album.name ?: album.title ?: stringResource(com.sample.core.ui.R.string.album_cover_content_description),
                 modifier =
                     coverModifier
                         .clip(RoundedCornerShape(22.dp))
@@ -196,7 +200,7 @@ private fun AlbumDetailContent(
             Spacer(modifier = Modifier.height(26.dp))
 
             Text(
-                text = album.name ?: album.title ?: "Unknown Album",
+                text = album.name ?: album.title ?: stringResource(com.sample.core.ui.R.string.unknown_album),
                 style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.Black,
                 textAlign = TextAlign.Center,
@@ -206,7 +210,7 @@ private fun AlbumDetailContent(
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = album.artist ?: "Unknown Artist",
+                text = album.artist ?: stringResource(R.string.unknown_artist),
                 modifier = artistModifier,
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -245,9 +249,9 @@ private fun AlbumDetailContent(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    AlbumStat(label = "Tracks", value = album.itemCount)
-                    AlbumStat(label = "Price", value = album.price)
-                    AlbumStat(label = "Type", value = album.contentType)
+                    AlbumStat(label = stringResource(R.string.label_tracks), value = album.itemCount)
+                    AlbumStat(label = stringResource(R.string.label_price), value = album.price)
+                    AlbumStat(label = stringResource(R.string.label_type), value = album.contentType)
                 }
             }
 
@@ -258,39 +262,39 @@ private fun AlbumDetailContent(
                 verticalArrangement = Arrangement.spacedBy(0.dp),
             ) {
                 Text(
-                    text = "Album info",
+                    text = stringResource(R.string.section_album_info),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Black,
                     modifier = Modifier.padding(bottom = 8.dp),
                 )
 
                 AlbumDetailRow(
-                    label = "Category",
+                    label = stringResource(R.string.label_category),
                     value = album.category,
                 )
 
                 AlbumDetailRow(
-                    label = "Release date",
+                    label = stringResource(R.string.label_release_date),
                     value = album.releaseDate,
                 )
 
                 AlbumDetailRow(
-                    label = "Tracks",
+                    label = stringResource(R.string.label_tracks),
                     value = album.itemCount,
                 )
 
                 AlbumDetailRow(
-                    label = "Price",
+                    label = stringResource(R.string.label_price),
                     value = album.price,
                 )
 
                 AlbumDetailRow(
-                    label = "Type",
+                    label = stringResource(R.string.label_type),
                     value = album.contentType,
                 )
 
                 AlbumDetailRow(
-                    label = "Copyright",
+                    label = stringResource(R.string.label_copyright),
                     value = album.rights,
                 )
             }
@@ -360,7 +364,7 @@ private fun LoadingState() {
     ) {
         CircularProgressIndicator(modifier = Modifier.size(48.dp))
         Text(
-            text = "Loading...",
+            text = stringResource(R.string.loading_album_details),
             modifier = Modifier.padding(top = 14.dp),
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -391,7 +395,7 @@ private fun ErrorState(message: String) {
                 verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 Text(
-                    text = "Could not load album",
+                    text = stringResource(R.string.error_loading_album_title),
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                 )
@@ -437,5 +441,5 @@ fun LoadingStatePreview() {
 @DevicePreviews
 @Composable
 fun ErrorStatePreview() {
-    ErrorState(message = "An error occurred while fetching the album details. Please try again later.")
+    ErrorState(message = stringResource(R.string.error_generic_album_details))
 }

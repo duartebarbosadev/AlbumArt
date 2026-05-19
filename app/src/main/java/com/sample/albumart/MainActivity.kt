@@ -43,6 +43,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -152,7 +153,7 @@ private fun AlbumArtTopBar(
     onNavigateBack: () -> Unit,
 ) {
     val albumDetailsKey = currentKey as? AlbumDetailsNavKey
-    val title = albumDetailsKey?.bandName?.takeIf { it.isNotBlank() } ?: "Album Art"
+    val title = albumDetailsKey?.bandName?.takeIf { it.isNotBlank() } ?: stringResource(R.string.app_name)
 
     TopAppBar(
         navigationIcon = {
@@ -173,7 +174,7 @@ private fun AlbumArtTopBar(
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_launcher_foreground),
-                        contentDescription = "Album Art app icon",
+                        contentDescription = stringResource(R.string.app_icon_content_description),
                         modifier = Modifier.size(38.dp),
                     )
                 }

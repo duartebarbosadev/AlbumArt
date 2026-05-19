@@ -1,6 +1,9 @@
 package com.sample.core.network
 
+import android.content.Context
 import com.sample.core.network.model.ItunesRssResponseDto
+import com.sample.network.R
+import dagger.hilt.android.qualifiers.ApplicationContext
 import jakarta.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -17,6 +20,7 @@ class NetworkRequests
     @Inject
     constructor(
         private val okHttpClient: OkHttpClient,
+        @ApplicationContext private val context: Context,
     ) {
         suspend fun getItunesRss(): ItunesRssResponseDto =
             withContext(Dispatchers.IO) {
@@ -29,7 +33,7 @@ class NetworkRequests
                 try {
                     okHttpClient.newCall(request).execute().use { response ->
                         if (!response.isSuccessful) {
-                            throw IOException("There was an issue with the request, try again later")
+                            throw IOException(context.getString(R.string.error_request_failed))
                         }
 
                         val body = response.body.string()
@@ -37,7 +41,7 @@ class NetworkRequests
                     }
                 } catch (exception: SerializationException) {
                     throw IOException(
-                        "Could not reach Itunes. Check your internet connection and try again.",
+                        context.getString(R.string.error_network_unreachable),
                         exception,
                     )
                 }

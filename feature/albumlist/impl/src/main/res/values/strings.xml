@@ -1,0 +1,5 @@
+<resources>
+    <string name="loading_albums_list">Loading…</string>
+    <string name="error_loading_albums_title">Could not load albums</string>
+    <string name="error_loading_albums_message">Could not load albums. Check your connection and try again.</string>
+</resources>

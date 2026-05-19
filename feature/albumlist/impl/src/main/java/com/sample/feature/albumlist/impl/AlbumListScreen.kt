@@ -34,6 +34,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -164,7 +165,6 @@ fun AlbumItem(
                         animatedVisibilityScope = animatedVisibilityScope,
                         enter = fadeIn(),
                         exit = fadeOut(),
-
                     )
         }
     }
@@ -177,7 +177,7 @@ fun AlbumItem(
     ) {
         AsyncImage(
             model = album.largeImageURL ?: album.imageURL,
-            contentDescription = album.name ?: album.title ?: "Album cover",
+            contentDescription = album.name ?: album.title ?: stringResource(com.sample.core.ui.R.string.album_cover_content_description),
             modifier =
                 coverModifier
                     .clip(RoundedCornerShape(18.dp))
@@ -188,7 +188,7 @@ fun AlbumItem(
         Spacer(modifier = Modifier.height(10.dp))
 
         Text(
-            text = album.name ?: album.title ?: "Unknown Album",
+            text = album.name ?: album.title ?: stringResource(com.sample.core.ui.R.string.unknown_album),
             modifier = titleModifier,
             style = MaterialTheme.typography.titleSmall,
             fontWeight = FontWeight.Bold,
@@ -241,7 +241,7 @@ private fun LoadingState() {
     ) {
         CircularProgressIndicator()
         Text(
-            text = "Loading...",
+            text = stringResource(R.string.loading_albums_list),
             modifier = Modifier.padding(top = 14.dp),
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -265,7 +265,7 @@ private fun ErrorState(message: String) {
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             Text(
-                text = "Could not load albums",
+                text = stringResource(R.string.error_loading_albums_title),
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold,
             )
