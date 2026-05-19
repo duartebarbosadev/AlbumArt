@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_network_unreachable">Не удалось подключиться к Itunes. Проверьте подключение к Интернету и повторите попытку.</string>
+    <string name="error_request_failed">Произошла ошибка при выполнении запроса. Повторите попытку позже.</string>
 </resources>

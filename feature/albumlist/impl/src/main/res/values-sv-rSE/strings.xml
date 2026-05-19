@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_loading_albums_message">Det gick inte att läsa in album. Kontrollera anslutningen och försök igen.</string>
+    <string name="error_loading_albums_title">Det gick inte att läsa in album</string>
+    <string name="loading_albums_list">Läser in…</string>
 </resources>

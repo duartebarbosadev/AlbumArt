@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_loading_albums_message">Nie można załadować albumów. Sprawdź połączenie i spróbuj ponownie.</string>
+    <string name="error_loading_albums_title">Nie można załadować albumów</string>
+    <string name="loading_albums_list">Ładowanie…</string>
 </resources>

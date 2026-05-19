@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_album_not_found">हमें वह एल्बम नहीं मिल सका।</string>
+    <string name="error_generic_album_details">एल्बम विवरण प्राप्त करते समय एक त्रुटि हुई। कृपया बाद में पुनः प्रयास करें।</string>
+    <string name="error_loading_album_details">एल्बम विवरण लोड नहीं कर सका। अपना कनेक्शन जांचें और पुनः प्रयास करें।</string>
+    <string name="error_loading_album_title">एल्बम लोड नहीं कर सका</string>
+    <string name="label_category">श्रेणी</string>
+    <string name="label_copyright">कॉपीराइट</string>
+    <string name="label_price">कीमत</string>
+    <string name="label_release_date">रिलीज़ की तारीख</string>
+    <string name="label_tracks">ट्रैक</string>
+    <string name="label_type">प्रकार</string>
+    <string name="loading_album_details">लोड हो रहा है…</string>
+    <string name="section_album_info">एल्बम की जानकारी</string>
+    <string name="unknown_artist">अज्ञात कलाकार</string>
 </resources>

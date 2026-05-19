@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_network_unreachable">आईट्यून्स तक नहीं पहुंच सका. अपना इंटरनेट कनेक्शन जांचें और फिर से कोशिश करें.</string>
+    <string name="error_request_failed">अनुरोध में कोई समस्या थी, बाद में फिर से कोशिश करें</string>
 </resources>

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_network_unreachable">Nu s-a putut contacta iTunes. Verificați conexiunea la internet și încercați din nou.</string>
+    <string name="error_request_failed">A apărut o problemă cu solicitarea, încercați din nou mai târziu.</string>
 </resources>

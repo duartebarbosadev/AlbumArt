@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_loading_albums_message">Impossibile caricare gli album. Controlla la connessione e riprova.</string>
+    <string name="error_loading_albums_title">Impossibile caricare gli album</string>
+    <string name="loading_albums_list">Caricamento in corso...</string>
 </resources>

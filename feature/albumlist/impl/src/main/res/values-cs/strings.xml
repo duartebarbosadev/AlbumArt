@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_loading_albums_message">Nepodařilo se načíst alba. Zkontrolujte připojení a zkuste to znovu.</string>
+    <string name="error_loading_albums_title">Nepodařilo se načíst alba</string>
+    <string name="loading_albums_list">Načítání…</string>
 </resources>

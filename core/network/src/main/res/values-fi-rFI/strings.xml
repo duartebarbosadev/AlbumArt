@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_network_unreachable">Itunesiin ei saatu yhteyttä. Tarkista internetyhteytesi ja yritä uudelleen.</string>
+    <string name="error_request_failed">Pyynnössä ilmeni ongelma, yritä uudelleen myöhemmin.</string>
 </resources>

@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_album_not_found">Non siamo riusciti a trovare l\'album.</string>
+    <string name="error_generic_album_details">Si è verificato un errore durante il recupero dei dettagli dell\'album. Riprova più tardi.</string>
+    <string name="error_loading_album_details">Impossibile caricare i dettagli dell\'album. Controlla la connessione e riprova.</string>
+    <string name="error_loading_album_title">Impossibile caricare l\'album</string>
+    <string name="label_category">Categoria</string>
+    <string name="label_copyright">Copyright</string>
+    <string name="label_price">Prezzo</string>
+    <string name="label_release_date">Data di pubblicazione</string>
+    <string name="label_tracks">Brani</string>
+    <string name="label_type">Tipo</string>
+    <string name="loading_album_details">Caricamento in corso…</string>
+    <string name="section_album_info">Informazioni sull\'album</string>
+    <string name="unknown_artist">Artista sconosciuto</string>
 </resources>

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_network_unreachable">Kāore i taea te tae atu ki Itunes. Tirohia tō hononga ipurangi ka ngana anō.</string>
+    <string name="error_request_failed">He take i te tono, ngana anō ā muri ake nei</string>
 </resources>

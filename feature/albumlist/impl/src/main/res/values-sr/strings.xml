@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_loading_albums_message">Nije moguće učitati albume. Proverite vezu i pokušajte ponovo.</string>
+    <string name="error_loading_albums_title">Nije moguće učitati albume</string>
+    <string name="loading_albums_list">Učitavanje…</string>
 </resources>

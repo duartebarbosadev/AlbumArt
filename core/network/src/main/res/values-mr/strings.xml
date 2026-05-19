@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_network_unreachable">आयट्यून्सशी संपर्क साधता आला नाही. तुमचे इंटरनेट कनेक्शन तपासा आणि पुन्हा प्रयत्न करा.</string>
+    <string name="error_request_failed">विनंतीमध्ये समस्या होती, कृपया नंतर पुन्हा प्रयत्न करा</string>
 </resources>

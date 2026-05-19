@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_album_not_found">Δεν ήταν δυνατή η εύρεση αυτού του άλμπουμ.</string>
+    <string name="error_generic_album_details">Παρουσιάστηκε σφάλμα κατά την ανάκτηση των λεπτομερειών του άλμπουμ. Δοκιμάστε ξανά αργότερα.</string>
+    <string name="error_loading_album_details">Δεν ήταν δυνατή η φόρτωση των λεπτομερειών του άλμπουμ. Ελέγξτε τη σύνδεσή σας και δοκιμάστε ξανά.</string>
+    <string name="error_loading_album_title">Δεν ήταν δυνατή η φόρτωση του άλμπουμ</string>
+    <string name="label_category">Κατηγορία</string>
+    <string name="label_copyright">Πνευματικά δικαιώματα</string>
+    <string name="label_price">Τιμή</string>
+    <string name="label_release_date">Ημερομηνία κυκλοφορίας</string>
+    <string name="label_tracks">Κομμάτια</string>
+    <string name="label_type">Τύπος</string>
+    <string name="loading_album_details">Φόρτωση…</string>
+    <string name="section_album_info">Πληροφορίες άλμπουμ</string>
+    <string name="unknown_artist">Άγνωστος καλλιτέχνης</string>
 </resources>

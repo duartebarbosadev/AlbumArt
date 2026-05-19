@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_album_not_found">We konden dat album niet vinden.</string>
+    <string name="error_generic_album_details">Er is een fout opgetreden bij het ophalen van de albumdetails. Probeer het later opnieuw.</string>
+    <string name="error_loading_album_details">Kon albumdetails niet laden. Controleer uw verbinding en probeer het opnieuw.</string>
+    <string name="error_loading_album_title">Kon album niet laden</string>
+    <string name="label_category">Categorie</string>
+    <string name="label_copyright">Auteursrecht</string>
+    <string name="label_price">Prijs</string>
+    <string name="label_release_date">Releasedatum</string>
+    <string name="label_tracks">Nummers</string>
+    <string name="label_type">Type</string>
+    <string name="loading_album_details">Laden…</string>
+    <string name="section_album_info">Albuminformatie</string>
+    <string name="unknown_artist">Onbekende artiest</string>
 </resources>

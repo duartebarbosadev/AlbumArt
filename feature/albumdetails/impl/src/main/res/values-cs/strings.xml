@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_album_not_found">Album jsme nenašli.</string>
+    <string name="error_generic_album_details">Při načítání podrobností o albu došlo k chybě. Zkuste to prosím později.</string>
+    <string name="error_loading_album_details">Nepodařilo se načíst podrobnosti o albu. Zkontrolujte připojení a zkuste to znovu.</string>
+    <string name="error_loading_album_title">Album se nepodařilo načíst</string>
+    <string name="label_category">Kategorie</string>
+    <string name="label_copyright">Autorská práva</string>
+    <string name="label_price">Cena</string>
+    <string name="label_release_date">Datum vydání</string>
+    <string name="label_tracks">Skladby</string>
+    <string name="label_type">Typ</string>
+    <string name="loading_album_details">Načítání…</string>
+    <string name="section_album_info">Informace o albu</string>
+    <string name="unknown_artist">Neznámý umělec</string>
 </resources>

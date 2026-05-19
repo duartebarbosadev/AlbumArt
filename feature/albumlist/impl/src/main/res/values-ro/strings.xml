@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_loading_albums_message">Nu s-au putut încărca albumele. Verificați conexiunea și încercați din nou.</string>
+    <string name="error_loading_albums_title">Nu s-au putut încărca albumele</string>
+    <string name="loading_albums_list">Se încarcă…</string>
 </resources>

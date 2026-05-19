@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_loading_albums_message">Kunne ikkje laste inn album. Sjekk tilkoplinga di og prøv igjen.</string>
+    <string name="error_loading_albums_title">Kunne ikkje laste inn album</string>
+    <string name="loading_albums_list">Lastar inn …</string>
 </resources>

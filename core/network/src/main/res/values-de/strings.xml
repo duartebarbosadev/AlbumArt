@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_network_unreachable">Itunes konnte nicht erreicht werden. Überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.</string>
+    <string name="error_request_failed">Bei der Anfrage ist ein Problem aufgetreten. Versuchen Sie es später erneut.</string>
 </resources>

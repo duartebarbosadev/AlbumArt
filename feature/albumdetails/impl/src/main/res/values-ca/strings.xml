@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_album_not_found">No hem pogut trobar aquest àlbum.</string>
+    <string name="error_generic_album_details">S\'ha produït un error en obtenir els detalls de l\'àlbum. Torna-ho a provar més tard.</string>
+    <string name="error_loading_album_details">No s\'han pogut carregar els detalls de l\'àlbum. Comprova la teva connexió i torna-ho a provar.</string>
+    <string name="error_loading_album_title">No s\'ha pogut carregar l\'àlbum</string>
+    <string name="label_category">Categoria</string>
+    <string name="label_copyright">Copyright</string>
+    <string name="label_price">Preu</string>
+    <string name="label_release_date">Data de publicació</string>
+    <string name="label_tracks">Pistes</string>
+    <string name="label_type">Tipus</string>
+    <string name="loading_album_details">Carregant…</string>
+    <string name="section_album_info">Informació de l\'àlbum</string>
+    <string name="unknown_artist">Artista desconegut</string>
 </resources>

@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+    <string name="error_loading_albums_message">एल्बम लोड नहीं हो सके। अपना कनेक्शन जांचें और फिर से प्रयास करें।</string>
+    <string name="error_loading_albums_title">एल्बम लोड नहीं हो सके</string>
+    <string name="loading_albums_list">लोड हो रहा है…</string>
 </resources>
