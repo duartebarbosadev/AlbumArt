@@ -73,6 +73,27 @@ class AlbumDetailsViewModelTest {
             )
         }
 
+    @Test
+    fun `retry reloads album after error`() =
+        runTest {
+            val album = testAlbum(id = "1")
+            coEvery { repository.getAlbumById("1") } throws RuntimeException("Network failed") andThen album
+
+            val viewModel =
+                AlbumDetailsViewModel(
+                    repository = repository,
+                    albumId = "1",
+                    context = context,
+                )
+
+            assertEquals(AlbumDetailsUiState.Error("Network failed"), viewModel.uiState.value)
+
+            viewModel.retry()
+
+            assertEquals(AlbumDetailsUiState.Success(album), viewModel.uiState.value)
+            coVerify(exactly = 2) { repository.getAlbumById("1") }
+        }
+
     private fun testAlbum(id: String) =
         Album(
             id = id,

@@ -22,6 +22,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -70,7 +71,10 @@ fun AlbumDetailsScreen(
         }
 
         is AlbumDetailsUiState.Error -> {
-            ErrorState(message = uiState.message)
+            ErrorState(
+                message = uiState.message,
+                onRetry = viewModel::retry,
+            )
         }
     }
 }
@@ -372,7 +376,10 @@ private fun LoadingState() {
 }
 
 @Composable
-private fun ErrorState(message: String) {
+private fun ErrorState(
+    message: String,
+    onRetry: () -> Unit,
+) {
     Box(
         modifier =
             Modifier
@@ -402,6 +409,12 @@ private fun ErrorState(message: String) {
                     text = message,
                     style = MaterialTheme.typography.bodyLarge,
                 )
+                Button(
+                    modifier = Modifier.padding(top = 8.dp),
+                    onClick = onRetry,
+                ) {
+                    Text(text = stringResource(R.string.action_retry))
+                }
             }
         }
     }
@@ -440,5 +453,8 @@ fun LoadingStatePreview() {
 @DevicePreviews
 @Composable
 fun ErrorStatePreview() {
-    ErrorState(message = stringResource(R.string.error_generic_album_details))
+    ErrorState(
+        message = stringResource(R.string.error_generic_album_details),
+        onRetry = {},
+    )
 }

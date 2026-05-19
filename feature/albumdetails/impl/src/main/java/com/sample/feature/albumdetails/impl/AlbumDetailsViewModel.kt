@@ -28,6 +28,10 @@ class AlbumDetailsViewModel
             loadAlbum()
         }
 
+        fun retry() {
+            loadAlbum()
+        }
+
         private fun loadAlbum() {
             viewModelScope.launch {
                 runCatching {

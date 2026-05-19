@@ -12,4 +12,5 @@
     <string name="loading_album_details">Loading…</string>
     <string name="error_loading_album_title">Could not load album</string>
     <string name="error_generic_album_details">An error occurred while fetching the album details. Please try again later.</string>
+    <string name="action_retry">Try again</string>
 </resources>

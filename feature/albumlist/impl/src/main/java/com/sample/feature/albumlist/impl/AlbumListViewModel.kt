@@ -26,9 +26,14 @@ class AlbumListViewModel
             loadAlbums()
         }
 
+        fun retry() {
+            loadAlbums()
+        }
+
         private fun loadAlbums() {
             viewModelScope.launch {
                 runCatching {
+                    _uiState.value = AlbumListUiState.Loading
                     repository.getAlbums()
                 }.onSuccess { albums ->
                     _uiState.value = AlbumListUiState.Success(albums)

@@ -22,6 +22,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -73,7 +74,10 @@ fun AlbumListScreen(
             }
 
             is AlbumListUiState.Error -> {
-                ErrorState(message = albumDataState.message)
+                ErrorState(
+                    message = albumDataState.message,
+                    onRetry = viewModel::retry,
+                )
             }
 
             is AlbumListUiState.Success -> {
@@ -250,7 +254,10 @@ private fun LoadingState() {
 }
 
 @Composable
-private fun ErrorState(message: String) {
+private fun ErrorState(
+    message: String,
+    onRetry: () -> Unit,
+) {
     Surface(
         modifier =
             Modifier
@@ -273,6 +280,12 @@ private fun ErrorState(message: String) {
                 text = message,
                 style = MaterialTheme.typography.bodyLarge,
             )
+            Button(
+                modifier = Modifier.padding(top = 8.dp),
+                onClick = onRetry,
+            ) {
+                Text(text = stringResource(R.string.action_retry))
+            }
         }
     }
 }
