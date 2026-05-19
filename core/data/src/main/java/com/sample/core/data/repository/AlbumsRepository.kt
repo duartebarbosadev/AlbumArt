@@ -9,4 +9,6 @@ interface AlbumsRepository {
     suspend fun getAlbums(): List<Album>
 
     suspend fun getAlbumById(albumId: String): Album?
+
+    suspend fun searchByAlbumName(albumName: String): List<Album>
 }

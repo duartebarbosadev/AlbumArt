@@ -5,6 +5,7 @@ import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -17,6 +18,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -25,15 +27,22 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -53,6 +62,7 @@ fun AlbumListScreen(
     animatedVisibilityScope: AnimatedVisibilityScope? = null,
 ) {
     val albumDataState by viewModel.uiState.collectAsState()
+    var searchQuery by rememberSaveable { mutableStateOf("") }
 
     Box(
         modifier =
@@ -83,6 +93,11 @@ fun AlbumListScreen(
             is AlbumListUiState.Success -> {
                 AlbumList(
                     albums = albumDataState.albums,
+                    searchQuery = searchQuery,
+                    onSearchQueryChange = { query ->
+                        searchQuery = query
+                        viewModel.searchByAlbumName(query)
+                    },
                     onAlbumClick = onAlbumClick,
                     sharedTransitionScope = sharedTransitionScope,
                     animatedVisibilityScope = animatedVisibilityScope,
@@ -96,28 +111,100 @@ fun AlbumListScreen(
 @Composable
 private fun AlbumList(
     albums: List<Album>,
+    searchQuery: String,
+    onSearchQueryChange: (String) -> Unit,
     onAlbumClick: (Album) -> Unit,
     sharedTransitionScope: SharedTransitionScope? = null,
     animatedVisibilityScope: AnimatedVisibilityScope? = null,
 ) {
-    LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = 142.dp),
-        modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(start = 18.dp, top = 18.dp, end = 18.dp, bottom = 28.dp),
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
-        verticalArrangement = Arrangement.spacedBy(22.dp),
-    ) {
-        items(
-            items = albums,
-            key = { album -> album.id ?: album.title.orEmpty() },
-        ) { album ->
-            AlbumItem(
-                album = album,
-                onClick = { onAlbumClick(album) },
-                sharedTransitionScope = sharedTransitionScope,
-                animatedVisibilityScope = animatedVisibilityScope,
-            )
+    Column(modifier = Modifier.fillMaxSize()) {
+        AlbumSearchBar(
+            query = searchQuery,
+            onQueryChange = onSearchQueryChange,
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(start = 18.dp, top = 18.dp, end = 18.dp),
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        LazyVerticalGrid(
+            columns = GridCells.Adaptive(minSize = 142.dp),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .weight(1f),
+            contentPadding = PaddingValues(start = 18.dp, top = 2.dp, end = 18.dp, bottom = 28.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(22.dp),
+        ) {
+            items(
+                items = albums,
+                key = { album -> album.id ?: album.title.orEmpty() },
+            ) { album ->
+                AlbumItem(
+                    album = album,
+                    onClick = { onAlbumClick(album) },
+                    sharedTransitionScope = sharedTransitionScope,
+                    animatedVisibilityScope = animatedVisibilityScope,
+                )
+            }
         }
+    }
+}
+
+@Composable
+private fun AlbumSearchBar(
+    query: String,
+    onQueryChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    OutlinedTextField(
+        value = query,
+        onValueChange = onQueryChange,
+        modifier = modifier,
+        singleLine = true,
+        shape = RoundedCornerShape(8.dp),
+        leadingIcon = { SearchGlyph() },
+        placeholder = {
+            Text(
+                text = stringResource(R.string.search_albums_hint),
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+            )
+        },
+    )
+}
+
+@Composable
+private fun SearchGlyph() {
+    val color = MaterialTheme.colorScheme.onSurfaceVariant
+
+    Canvas(modifier = Modifier.size(22.dp)) {
+        val radius = size.minDimension * 0.28f
+        val center = Offset(size.width * 0.42f, size.height * 0.42f)
+        drawCircle(
+            color = color,
+            radius = radius,
+            center = center,
+            style = Stroke(width = 2.dp.toPx()),
+        )
+        drawLine(
+            color = color,
+            start =
+                Offset(
+                    center.x + radius * 0.66f,
+                    center.y + radius * 0.66f,
+                ),
+            end =
+                Offset(
+                    center.x + radius * 1.42f,
+                    center.y + radius * 1.42f,
+                ),
+            strokeWidth = 2.dp.toPx(),
+            cap = StrokeCap.Round,
+        )
     }
 }
 
@@ -295,6 +382,8 @@ private fun ErrorState(
 fun AlbumListScreenPreview() {
     AlbumList(
         onAlbumClick = {},
+        searchQuery = "",
+        onSearchQueryChange = {},
         albums =
             listOf(
                 Album(

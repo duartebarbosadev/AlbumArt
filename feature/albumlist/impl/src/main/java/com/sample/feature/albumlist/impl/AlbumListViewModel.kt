@@ -46,4 +46,10 @@ class AlbumListViewModel
                 }
             }
         }
+
+        fun searchByAlbumName(query: String) {
+            viewModelScope.launch {
+                _uiState.value = AlbumListUiState.Success(repository.searchByAlbumName(query))
+            }
+        }
     }

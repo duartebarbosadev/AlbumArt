@@ -3,4 +3,5 @@
     <string name="error_loading_albums_title">Could not load albums</string>
     <string name="error_loading_albums_message">Could not load albums. Check your connection and try again.</string>
     <string name="action_retry">Try again</string>
+    <string name="search_albums_hint">Search albums</string>
 </resources>

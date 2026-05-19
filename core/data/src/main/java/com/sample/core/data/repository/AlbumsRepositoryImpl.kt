@@ -35,4 +35,13 @@ class AlbumsRepositoryImpl
             }
             return albumsCache.firstOrNull { it.id == albumId }
         }
+
+        override suspend fun searchByAlbumName(albumName: String): List<Album> {
+            // If there's no album with that ID cached, get the albums first
+            if (albumsCache.isEmpty()) {
+                getAlbums()
+            }
+
+            return albumsCache.filter { it.name?.contains(albumName, ignoreCase = true) ?: false }
+        }
     }
